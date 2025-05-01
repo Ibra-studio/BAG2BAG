@@ -1,10 +1,17 @@
 import React from "react";
+
 import { ReactComponent as Img } from "../../assets/icons/header-image2.svg";
+
 import { ReactComponent as Img2 } from "../../assets/icons/header-image3.svg";
+
 import { ReactComponent as Img3 } from "../../assets/icons/hero-image4.svg";
+
 import { ReactComponent as Img4 } from "../../assets/icons/hero-imageMobile.svg";
+
 import { ReactComponent as Icon } from "../../assets/icons/header-icon.svg";
+
 import { ReactComponent as IconLiv } from "../../assets/icons/icon-livraison.svg";
+
 import { ReactComponent as IconSearh } from "../../assets/icons/icon-search.svg";
 import "../../assets/global.css";
 import BtnPrimary from "../../components/ui/Btnprim";
