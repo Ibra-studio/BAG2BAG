@@ -29,29 +29,29 @@ export default function Testimonials() {
           </div>
           <div className="testimonials flex flex-col bg-white p-[20px] rounded-[30px] col-start-1 shadow-lg gap-[10px] border-black border-1">
             <p className="text-[20px] text-center text-secondary">
-              "Avant Bag2Bag, envoyer un simple colis à Dakar coûtait une
-              fortune. Maintenant, je trouve toujours un étudiant qui rentre.
-              C’est rapide, humain et moins cher."
+              "J’ai transporté deux colis pour des Togolais qui m’ont bien
+              remercié. On devrait tous utiliser Bag2Bag au lieu de laisser nos
+              valises à moitié vides."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] 5 p-[10px] items-center">
               <Avatar />
               <div className="flex flex-col">
-                <h5 className="text-[20px]"> Amadou </h5>
-                <p className="text-[15px]"> SG GUINÉE kenitra</p>
+                <h5 className="text-[20px]"> George </h5>
+                <p className="text-[15px]"> SG TOGO kenitra</p>
               </div>
             </div>
           </div>
           <div className="testimonials flex flex-col bg-white p-[20px] rounded-[30px] shadow-lg gap-[10px] border-black border-1">
             <p className="text-[20px] text-center text-secondary">
-              "Avant Bag2Bag, envoyer un simple colis à Dakar coûtait une
-              fortune. Maintenant, je trouve toujours un étudiant qui rentre.
-              C’est rapide, humain et moins cher."
+              "Les transporteurs classiques prennent des semaines. Bag2Bag m’a
+              permis de recevoir mes colis du Cameroun en moins d’une semaine.
+              C’est fluide et rassurant."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
               <Avatar />
               <div className="flex flex-col">
-                <h5 className="text-[20px]"> Amadou </h5>
-                <p className="text-[15px]"> SG GUINÉE kenitra</p>
+                <h5 className="text-[20px]"> Lumière </h5>
+                <p className="text-[15px]"> SG Congo brazza Rabat</p>
               </div>
             </div>
           </div>
@@ -59,16 +59,17 @@ export default function Testimonials() {
         <div className="central-grid grid grid-rows-[2fr_auto_1px_auto_5px] grid-cols-[1fr_1fr] gap-[50px] ">
           <div className="testimonials flex flex-col justify-between bg-white p-[50px] rounded-[30px] shadow-lg gap-[10px] col-span-2 border-black border-1">
             <h2 className="text-[40px] text-center text-secondary">
-              “Integer id nunc sit semper purus. Bibendum at lacus ut arcu
-              blandit montes vitae auctor libero. Hac condimentum dignissim nibh
-              vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et
-              proin. Non hendrerit in vel ac diam.”
+              “J’ai utilisé Bag2Bag pour envoyer un colis à ma famille au pays.
+              Le processus a été simple, rapide et sans stress. On se sent en
+              confiance du début à la fin, et surtout, on a l’impression d’aider
+              et d’être aidé. C’est vraiment un service pensé pour nous, par
+              nous.”
             </h2>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center justify-center ">
               <Avatar />
               <div className="flex flex-col">
-                <h5 className="text-[20px]"> Amadou </h5>
-                <p className="text-[15px]"> SG GUINÉE kenitra</p>
+                <h5 className="text-[20px]"> Alidji </h5>
+                <p className="text-[15px]"> SG MALI kenitra</p>
               </div>
             </div>
           </div>
@@ -102,15 +103,15 @@ export default function Testimonials() {
           </div>
           <div className="testimonials flex flex-col bg-white p-[20px] row-span-2 rounded-[30px] shadow-lg gap-[10px] border-black border-1">
             <p className="text-[20px] text-center text-secondary">
-              "Avant Bag2Bag, envoyer un simple colis à Dakar coûtait une
-              fortune. Maintenant, je trouve toujours un étudiant qui rentre.
-              C’est rapide, humain et moins cher."
+              "J’ai envoyé un colis à ma grand-mère au Gabon grâce à une
+              étudiante. C’était simple, rapide, et beaucoup moins cher que
+              DHL."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
               <Avatar />
               <div className="flex flex-col">
-                <h5 className="text-[20px]"> Amadou </h5>
-                <p className="text-[15px]"> SG GUINÉE kenitra</p>
+                <h5 className="text-[20px]"> Anicet </h5>
+                <p className="text-[15px]"> SG Gabon Mèknes</p>
               </div>
             </div>
           </div>
@@ -302,15 +303,15 @@ export default function Testimonials() {
           </div>
           <div className="testimonials flex flex-col bg-white p-[20px] rounded-[30px] shadow-lg gap-[10px] border-black border-1">
             <p className="text-[18px] text-center text-secondary">
-              "Avant Bag2Bag, envoyer un simple colis à Dakar coûtait une
-              fortune. Maintenant, je trouve toujours un étudiant qui rentre.
-              C’est rapide, humain et moins cher."
+              J’ai transporté deux colis pour des Togolais qui m’ont bien
+              remercié. On devrait tous utiliser Bag2Bag au lieu de laisser nos
+              valises à moitié vides."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
               <Avatar />
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
-                <p className="text-[15px]"> SG GUINÉE kenitra</p>
+                <p className="text-[15px]"> SG TOGO kenitra</p>
               </div>
             </div>
           </div>
