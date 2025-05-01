@@ -1,0 +1,15 @@
+.TrustCard_container {
+  padding: 30px 31px;
+  height: fit-content;
+
+  background-color: white;
+
+  border-radius: 30px;
+  border: solid 2px black;
+}
+.TrustCard_content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
