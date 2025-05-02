@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/global.css";
+import "@/assets/global.css";
 function Painsection() {
   return (
     <div className=" w-full bg-[#368f8b] mx-auto px-[15px] py-16 md:py-40 text-center  mt-[100px]">

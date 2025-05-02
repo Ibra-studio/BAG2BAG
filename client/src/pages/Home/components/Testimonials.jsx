@@ -1,6 +1,6 @@
 import React from "react";
-import "../../assets/global.css";
-import Avatar from "../../components/ui/Avatar";
+import "@/assets/global.css";
+import Avatar from "@/components/ui/Avatar";
 export default function Testimonials() {
   return (
     <section className="flex flex-col pt-[100px] items-center justify-center relative testimonials-section mb-[100px]">

@@ -1,12 +1,12 @@
-import "../../assets/global.css";
+import "../../../assets/global.css";
 // import "./timelinesection.css";
 import React from "react";
 import TrustCardList from "./TrustCard";
-import { ReactComponent as Iconship } from "../../assets/icons/icon-ship.svg";
-import { ReactComponent as Iconsheap } from "../../assets/icons/icon-sheap.svg";
-import { ReactComponent as Iconsecurity } from "../../assets/icons/security-icon.svg";
-import { ReactComponent as Check } from "../../assets/icons/check.svg";
-import BtnDiscovery from "../../components/ui/BtnDiscovery";
+import { ReactComponent as Iconship } from "@/assets/icons/icon-ship.svg";
+import { ReactComponent as Iconsheap } from "@/assets/icons/icon-sheap.svg";
+import { ReactComponent as Iconsecurity } from "@/assets/icons/security-icon.svg";
+import { ReactComponent as Check } from "@/assets/icons/check.svg";
+import BtnDiscovery from "@/components/ui/BtnDiscovery";
 // @ts-ignore
 const data = [
   {

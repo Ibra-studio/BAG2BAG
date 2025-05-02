@@ -8,7 +8,7 @@ import { ReactComponent as KgIcon } from "../../assets/icons/kgIcon.svg";
 import { ReactComponent as Search } from "../../assets/icons/Search.svg";
 import { ReactComponent as Plane } from "../../assets/icons/AvionIcon.svg";
 import Avatar from "../../components/ui/Avatar";
-import DatePicker from "./Datepicker";
+import DatePicker from "./components/Datepicker";
 import { set } from "date-fns";
 
 const data = [

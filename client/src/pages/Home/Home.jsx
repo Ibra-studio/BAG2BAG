@@ -1,9 +1,9 @@
 import React from "react";
 import Navbar from "../../components/ui/Navbar";
-import HeaderSection from "./Headersection";
-import Painsection from "./Painsection";
-import Timelinesection from "./Timelinesection";
-import Testimonials from "./Testimonials";
+import HeaderSection from "./components/Headersection";
+import Painsection from "./components/Painsection";
+import Timelinesection from "./components/Timelinesection";
+import Testimonials from "./components/Testimonials";
 import Footer from "../../components/ui/Footer";
 
 function Home() {

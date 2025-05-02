@@ -1,21 +1,21 @@
 import React from "react";
 
-import { ReactComponent as Img } from "../../assets/icons/header-image2.svg";
+import { ReactComponent as Img } from "@/assets/icons/header-image2.svg";
 
-import { ReactComponent as Img2 } from "../../assets/icons/header-image3.svg";
+import { ReactComponent as Img2 } from "@/assets/icons/header-image3.svg";
 
-import { ReactComponent as Img3 } from "../../assets/icons/hero-image4.svg";
+import { ReactComponent as Img3 } from "@/assets/icons/hero-image4.svg";
 
-import { ReactComponent as Img4 } from "../../assets/icons/hero-imageMobile.svg";
+import { ReactComponent as Img4 } from "@/assets/icons/hero-imageMobile.svg";
 
-import { ReactComponent as Icon } from "../../assets/icons/header-icon.svg";
+import { ReactComponent as Icon } from "@/assets/icons/header-icon.svg";
 
-import { ReactComponent as IconLiv } from "../../assets/icons/icon-livraison.svg";
+import { ReactComponent as IconLiv } from "@/assets/icons/icon-livraison.svg";
 
-import { ReactComponent as IconSearh } from "../../assets/icons/icon-search.svg";
-import "../../assets/global.css";
-import BtnPrimary from "../../components/ui/Btnprim";
-import BtnSecondary from "../../components/ui/Btnsec";
+import { ReactComponent as IconSearh } from "@/assets/icons/icon-search.svg";
+import "@/assets/global.css";
+import BtnPrimary from "@/components/ui/Btnprim";
+import BtnSecondary from "@/components/ui/Btnsec";
 export default function HeaderSection() {
   return (
     <section className="flex flex-col gap-[50px] items-center justify-center pt-[100px] md:pt-40 header-section ">
