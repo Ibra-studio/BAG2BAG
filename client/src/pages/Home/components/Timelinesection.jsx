@@ -2,10 +2,15 @@ import "../../../assets/global.css";
 // import "./timelinesection.css";
 import React from "react";
 import TrustCardList from "./TrustCard";
+// @ts-ignore
 import { ReactComponent as Iconship } from "@/assets/icons/icon-ship.svg";
+// @ts-ignore
 import { ReactComponent as Iconsheap } from "@/assets/icons/icon-sheap.svg";
+// @ts-ignore
 import { ReactComponent as Iconsecurity } from "@/assets/icons/security-icon.svg";
+// @ts-ignore
 import { ReactComponent as Check } from "@/assets/icons/check.svg";
+// @ts-ignore
 import BtnDiscovery from "@/components/ui/BtnDiscovery";
 // @ts-ignore
 const data = [

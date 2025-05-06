@@ -10,7 +10,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // Remplace __dirname par import.meta.url
 export default defineConfig({
-  plugins: [react(), svgr(), tailwindcss()],
+  // @ts-ignore
+  plugins: [react(), svgr(), tailwindcss(), tailwindcss-motion")],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

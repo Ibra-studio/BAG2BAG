@@ -1,5 +1,6 @@
 import React from "react";
 import "@/assets/global.css";
+// @ts-ignore
 import Avatar from "@/components/ui/Avatar";
 export default function Testimonials() {
   return (

@@ -6,6 +6,8 @@
 @plugin "daisyui" {
   themes: false;
 }
+@plugin "tailwindcss-motion";
+
 @theme {
   --color-bg: #f6f8ff;
   --color-green: #368f8b;
