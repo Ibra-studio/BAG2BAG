@@ -4,8 +4,8 @@ import { ReactComponent as UserIcon } from "../../assets/icons/User.svg";
 import { ReactComponent as DiscIcon } from "../../assets/icons/disconnect-icon.svg";
 import BtnPrimary from "./Btnprim";
 
-export default function Navbar() {
-  const Isloggin = true;
+export default function Navbar({ children, setShowModal }) {
+  const Isloggin = false;
   return (
     <div>
       <div className="p-5  2xl:mx-[150px] xl:mx-[50px]  md:mx-[40px]  sm:mx-[20px] hidden sm:!flex   gap-[20px] justify-between items-center border-b-solid border-b-[0.3px] border-b-[#000000]">
@@ -54,7 +54,13 @@ export default function Navbar() {
               </div>
             </div>
           ) : (
-            <BtnPrimary>S'inscrire</BtnPrimary>
+            <button
+              className="bg-transparent border-none"
+              onClick={() => setShowModal((prev) => !prev)}
+            >
+              {" "}
+              {children}
+            </button>
           )}
         </div>
       </div>
@@ -100,9 +106,7 @@ export default function Navbar() {
             </div>
           </div>
         ) : (
-          <BtnPrimary>
-            <UserIcon /> S'inscrire
-          </BtnPrimary>
+          <button className="bg-transparent border-none"> {children}</button>
         )}
       </div>
     </div>

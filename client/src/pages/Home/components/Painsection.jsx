@@ -21,7 +21,7 @@ function Painsection() {
           </p>
         </div>
         <svg
-          className="shrink-0 w-12 fill-white opacity-70 max-md:-scale-x-100 md:-rotate-90"
+          className="shrink-0 w-12 fill-white opacity-70 max-md:-scale-x-100 md:-rotate-90 motion-translate-x-loop-[15%] motion-translate-y-loop-[0%] motion-ease-in-out"
           viewBox="0 0 138 138"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ function Painsection() {
           </p>
         </div>
         <svg
-          className="shrink-0 w-12 fill-white opacity-70 md:-scale-x-100 md:-rotate-90"
+          className="shrink-0 w-12 fill-white opacity-70 md:-scale-x-100 md:-rotate-90 motion-translate-x-loop-[15%] motion-translate-y-loop-[0%] motion-ease-in-out"
           viewBox="0 0 138 138"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

@@ -25,7 +25,9 @@ import "@/assets/global.css";
 import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore
 import BtnSecondary from "@/components/ui/Btnsec";
-export default function HeaderSection() {
+import Modal from "../../../components/modal";
+import Login from "../../Auth/login";
+export default function HeaderSection({ showModal, setShowModal }) {
   return (
     <section className="flex flex-col gap-[50px] items-center justify-center pt-[100px] md:pt-40 header-section ">
       <div className="flex flex-col gap-[50px]  px-[15px]   header-text  text-center  ">
@@ -36,7 +38,7 @@ export default function HeaderSection() {
           </h1>
           <Icon className="absolute top-[-30px] right-[-5px] md:right-[-15px] lg:right-[-30px]  motion-preset-wobble hidden lg:!block " />
         </div>
-        <p className="sm:text-[25px] text-[16px] font-[--roboto]">
+        <p className="sm:text-[25px] text-[16px] font-[--roboto] motion-scale-in-[1.5] motion-opacity-in-[0%]">
           Gagnez de l'argent en partageant votre espace bagages inutilisé{" "}
           <br className="hidden md:!inline" /> avec des personnes qui cherchent
           à envoyer des colis
@@ -52,6 +54,11 @@ export default function HeaderSection() {
           </BtnSecondary>
         </div>
       </div>
+      {showModal && (
+        <Modal title={"Connectez-vous"} setShowModal={setShowModal}>
+          <Login />
+        </Modal>
+      )}
       <div className="relative flex justify-center px-[15px] items-center header-image w-full">
         <div className=" absolute w-[100%] h-[50%] bg-[#368f8b] rounded-[100%] blur-[400px] z-[-1] mt-15"></div>
         <div className="h-full w-full flex justify-center items-center  ">
