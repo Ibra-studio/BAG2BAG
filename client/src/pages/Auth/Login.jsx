@@ -1,37 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "@/assets/global.css";
+// @ts-ignore
+import Input from "@/components/form/Input";
+import BtnPrimary from "../../components/ui/Btnprim";
 function login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  //handle login form submit
+  async function handlelogin(e) {
+    e.preventDefault();
+  }
   return (
     <div>
-      <form>
+      <form onSubmit={handlelogin}>
         <div className="flex flex-col gap-5 mb-5">
-          <div className="flex flex-col gap-2 ">
-            <label htmlFor="email">Email / username </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="Enter your email or username"
-              className="bg-[#F7F7F7] p-3 focus:border-3 focus:border-btn-primary"
-            />
-          </div>
-          <div className="flex flex-col gap-2 ">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              className="bg-[#F7F7F7] p-3 focus:border-3 focus:border-btn-primary text-[20px]"
-              placeholder="Enter your password"
-            />
-          </div>
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label={"Email / nom d'utilisateur"}
+            type="email"
+            placeholder="Entrez votre email ou nom d'utilisateur"
+          />
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label={"Mot de passe"}
+            type="password"
+            placeholder="Mininum 8 charactères"
+          />
+
+          {error && <p className="text-red-500 ">{error}</p>}
+          <BtnPrimary className="text-[20px]  flex justify-center">
+            Se connecter
+          </BtnPrimary>
         </div>
       </form>
-      <button className="text-center text-green underline cursor-pointer">
-        Nouveau-membre? Inscrivez-vous ici
-      </button>
     </div>
   );
 }

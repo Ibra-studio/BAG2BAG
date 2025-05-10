@@ -197,7 +197,9 @@ const data = [
 export default function PostPage() {
   return (
     <div>
-      <Navbar />
+      <Navbar>
+        <BtnPrimary>S'inscrire / Se connecter</BtnPrimary>
+      </Navbar>
       <section className="flex justify-center items-center flex-col pt-[100px]  w-[100%]">
         <SearchBar />
         <div className="spacer h-40"></div>

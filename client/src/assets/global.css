@@ -11,7 +11,7 @@
 @theme {
   --color-bg: #f6f8ff;
   --color-green: #368f8b;
-  --color-secondary: #4d525f;
+  --color-Secondary: #4d525f;
   --color-btn-primary: #aabbf8;
   --color-btn-primary-hover: #889be0;
   --color-btn-secondary-hover: #2a2929;
@@ -64,7 +64,6 @@ font-face {
 :root {
   --urbanist: "Urbanist", sans-serif;
   --roboto: "Roboto", sans-serif;
-  --text-secondary: #4d525f;
   --btn-primary-color: #f9faf2;
   --radius: 0.625rem;
   --background: oklch(1 0 0);

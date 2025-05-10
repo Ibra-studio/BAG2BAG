@@ -27,7 +27,7 @@ import BtnPrimary from "@/components/ui/Btnprim";
 import BtnSecondary from "@/components/ui/Btnsec";
 import Modal from "../../../components/modal";
 import Login from "../../Auth/login";
-export default function HeaderSection({ showModal, setShowModal }) {
+export default function HeaderSection() {
   return (
     <section className="flex flex-col gap-[50px] items-center justify-center pt-[100px] md:pt-40 header-section ">
       <div className="flex flex-col gap-[50px]  px-[15px]   header-text  text-center  ">
@@ -54,11 +54,7 @@ export default function HeaderSection({ showModal, setShowModal }) {
           </BtnSecondary>
         </div>
       </div>
-      {showModal && (
-        <Modal title={"Connectez-vous"} setShowModal={setShowModal}>
-          <Login />
-        </Modal>
-      )}
+
       <div className="relative flex justify-center px-[15px] items-center header-image w-full">
         <div className=" absolute w-[100%] h-[50%] bg-[#368f8b] rounded-[100%] blur-[400px] z-[-1] mt-15"></div>
         <div className="h-full w-full flex justify-center items-center  ">

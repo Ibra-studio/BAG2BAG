@@ -1,7 +1,11 @@
 import React from "react";
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
-import { ReactComponent as UserIcon } from "../../assets/icons/User.svg";
-import { ReactComponent as DiscIcon } from "../../assets/icons/disconnect-icon.svg";
+// @ts-ignore
+import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
+// @ts-ignore
+import { ReactComponent as UserIcon } from "@/assets/icons/User.svg";
+// @ts-ignore
+import { ReactComponent as DiscIcon } from "@/assets/icons/disconnect-icon.svg";
+// @ts-ignore
 import BtnPrimary from "./Btnprim";
 
 export default function Navbar({ children, setShowModal }) {
