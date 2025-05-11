@@ -3,7 +3,7 @@ import "@/assets/global.css";
 // @ts-ignore
 import Input from "@/components/form/Input";
 import BtnPrimary from "../../components/ui/Btnprim";
-function login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -11,6 +11,16 @@ function login() {
   //handle login form submit
   async function handlelogin(e) {
     e.preventDefault();
+
+    if (!email) {
+      setError("Veuillez entrer votre email ou nom d'utilisateur");
+      return;
+    }
+    if (!password) {
+      setError("Veuillez entrer votre mot de passe");
+      return;
+    }
+    setError("");
   }
   return (
     <div>
@@ -19,9 +29,9 @@ function login() {
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            label={"Email / nom d'utilisateur"}
+            label={"Email "}
             type="email"
-            placeholder="Entrez votre email ou nom d'utilisateur"
+            placeholder="Entrez votre email "
           />
           <Input
             value={password}
@@ -40,5 +50,3 @@ function login() {
     </div>
   );
 }
-
-export default login;
