@@ -110,7 +110,13 @@ export default function Navbar({ children, setShowModal }) {
             </div>
           </div>
         ) : (
-          <button className="bg-transparent border-none"> {children}</button>
+          <button
+            className="bg-transparent border-none"
+            onClick={() => setShowModal((prev) => !prev)}
+          >
+            {" "}
+            {children}
+          </button>
         )}
       </div>
     </div>

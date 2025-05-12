@@ -7,6 +7,8 @@ export default function Modal({
   title,
   currentPage,
   setCurrentPage,
+  blur = "4px",
+  classname,
 }) {
   function handleToggleModal() {
     setShowModal((prev) => !prev);
@@ -14,11 +16,11 @@ export default function Modal({
   }
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-5  backdrop-blur-[4px]"
+      className={`${classname}fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-5 backdrop-blur-${blur}`}
       onClick={handleToggleModal}
     >
       <div
-        className="bg-white  p-6 rounded-lg shadow-lg w-full max-w-md relative "
+        className="bg-white  p-6 rounded-lg shadow-lg w-full max-w-md relative"
         onClick={(e) => e.stopPropagation()}
       >
         <h4 className="text-center mb-[15px]">{title}</h4>
