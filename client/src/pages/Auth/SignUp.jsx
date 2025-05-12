@@ -14,6 +14,17 @@ function SignUp() {
   const [image, setImage] = useState(null);
   function handleSignUp(e) {
     e.preventDefault();
+
+    if (!fullName) {
+      setError("veuillez saisir votre Nom complet");
+    }
+    if (!email) {
+      setError("veuillez entrer votre addresse email");
+    }
+    if (!password) {
+      setError("veuillez entrer votre mot de passe");
+    }
+    setError("");
   }
   return (
     <div className="">

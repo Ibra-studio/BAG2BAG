@@ -1,16 +1,29 @@
+// @ts-ignore
 import React, { useState } from "react";
 import Navbar from "../../components/ui/Navbar";
+// @ts-ignore
 import Footer from "../../components/ui/Footer";
-
+import { addDays } from "date-fns";
 import "../../assets/global.css";
+// @ts-ignore
 import { ReactComponent as Ellipse } from "../../assets/icons/ellipse.svg";
+// @ts-ignore
 import { ReactComponent as KgIcon } from "../../assets/icons/kgIcon.svg";
+// @ts-ignore
 import { ReactComponent as Search } from "../../assets/icons/Search.svg";
+// @ts-ignore
 import { ReactComponent as Plane } from "../../assets/icons/AvionIcon.svg";
 import Avatar from "../../components/ui/Avatar";
 import DatePicker from "./components/Datepicker";
-import { set } from "date-fns";
 
+// @ts-ignore
+import BtnPrimary from "@/components/ui/Btnprim";
+// @ts-ignore
+import Modal from "@/components/modal";
+// @ts-ignore
+import Login from "@/pages/Auth/login";
+// @ts-ignore
+import SignUp from "@/pages/Auth/signup";
 const data = [
   {
     depart: "Sénégal,Dakar",
@@ -195,14 +208,37 @@ const data = [
 ];
 
 export default function PostPage() {
+  const [showModal, setShowModal] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState("login");
   return (
     <div>
-      <Navbar>
+      <Navbar setShowModal={setShowModal}>
         <BtnPrimary>S'inscrire / Se connecter</BtnPrimary>
       </Navbar>
+      {showModal &&
+        (currentPage === "login" ? (
+          <Modal
+            title={"Connectez-vous"}
+            setShowModal={setShowModal}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          >
+            <Login />
+          </Modal>
+        ) : (
+          <Modal
+            title={"Inscrivez-vous"}
+            setShowModal={setShowModal}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          >
+            <SignUp />
+          </Modal>
+        ))}
       <section className="flex justify-center items-center flex-col pt-[100px]  w-[100%]">
         <SearchBar />
-        <div className="spacer h-40"></div>
+        <div className="spacer h-33"></div>
         <Filter />
         <div className="spacer h-10"></div>
         <Postlist />
@@ -214,68 +250,101 @@ export default function PostPage() {
 function SearchBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [Kg, setKg] = useState(0);
-
+  const [depart, setDepart] = useState("");
+  const [destination, setDestination] = useState("");
+  const [error, setError] = useState("");
+  const [date, setDate] = useState({
+    from: new Date(), // Date du moment
+    to: addDays(new Date(), 20), // 20 jours après la date du moment
+  });
   function toggleDropdown() {
     setIsOpen((prev) => !prev);
   }
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!depart) {
+      setError("veuillez saisir un pays de depart");
+    }
+    if (!depart) {
+      setError("veuillez saisir un pays de destination");
+    }
+
+    setError("");
+    setDepart("");
+    setDestination("");
+    setKg(0);
+  }
   return (
     <div>
-      <div className="flex flex-row  Search-Bar">
-        <div className="flex flex-row bg-white px-[10px] py-[20px] rounded-l-[30px] rounded-r-[0px]">
-          <div className="flex flex-row gap-[3px] items-center  border-r-1 justify-center">
-            <Ellipse />
-            <input
-              type="text"
-              placeholder="Depart"
-              className="focus:outline-none text-[20px] text--roboto "
-            />
-          </div>
-          <div className="flex flex-row gap-[3px] ml-2 items-center   border-r-1 justify-center">
-            <Ellipse />
-            <input
-              type="text"
-              placeholder="Destination"
-              className="focus:outline-none text-[20px] text-roboto "
-            />
-          </div>
-          <div>
-            <DatePicker className={"text-roboto"} />
-          </div>
-          <div
-            className="flex flex-col gap-[3px]  ml-2  items-center justify-center relative "
-            onClick={toggleDropdown}
-          >
-            <div className="flex flex-row gap-[10px] items-center justify-center text-[20px]">
-              <KgIcon />{" "}
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-row  Search-Bar">
+          <div className="flex flex-row bg-white px-[10px] py-[20px] rounded-l-[30px] rounded-r-[0px]">
+            <div className="flex flex-row gap-[3px] items-center  border-r-1 justify-center">
+              <Ellipse />
               <input
-                className="w-[30px]"
                 type="text"
-                value={Kg}
-                placeholder="kg"
-                onChange={(e) => setKg(e.target.value)}
-              />{" "}
-              kg
+                placeholder="Depart"
+                value={depart}
+                onChange={({ target }) => setDepart(target.value)}
+                className="focus:outline-none text-[20px] text--roboto "
+              />
             </div>
-            {isOpen && (
-              <div className="mt-[20px] absolute bottom-[-30px]   bg-white">
+            <div className="flex flex-row gap-[3px] ml-2 items-center   border-r-1 justify-center">
+              <Ellipse />
+              <input
+                type="text"
+                placeholder="Destination"
+                value={destination}
+                onChange={({ target }) => setDestination(target.value)}
+                className="focus:outline-none text-[20px] text-roboto "
+              />
+            </div>
+            <div>
+              <DatePicker
+                className={"text-roboto"}
+                date={date}
+                setDate={setDate}
+              />
+            </div>
+            <div
+              className="flex flex-col gap-[3px]  ml-2  items-center justify-center relative "
+              onClick={toggleDropdown}
+            >
+              <div className="flex flex-row gap-[10px] items-center justify-center text-[20px] text-Secondary">
+                <KgIcon />{" "}
                 <input
-                  type="range"
-                  min={0}
-                  max={23}
-                  onChange={(e) => setKg(e.target.value)}
-                  className="bg-green w-[100px]"
-                />
+                  className="w-[30px]"
+                  type="text"
+                  value={Kg}
+                  placeholder="kg"
+                  // @ts-ignore
+                  onChange={(e) => setKg(Number(e.target.value))}
+                />{" "}
+                kg
               </div>
-            )}
+              {isOpen && (
+                <div className="mt-[20px] absolute bottom-[-30px]   bg-white">
+                  <input
+                    type="range"
+                    min={0}
+                    max={23}
+                    // @ts-ignore
+                    onChange={(e) => setKg(e.target.value)}
+                    className="bg-green w-[100px]"
+                  />
+                </div>
+              )}
+            </div>
           </div>
+          <button className="bg-btn-primary flex flex-row gap-[5px] justify-center items-center px-[10px] py-[20px] text-[20px] hover:cursor-pointer hover:bg-btn-primary/80 rounded-l-[0px] rounded-r-[30px]">
+            <Search /> Rechercher
+          </button>
         </div>
-        <button className="bg-btn-primary flex flex-row gap-[5px] justify-center items-center px-[10px] py-[20px] text-[20px] hover:cursor-pointer rounded-l-[0px] rounded-r-[30px]">
-          <Search /> Rechercher
-        </button>
-      </div>
+      </form>
     </div>
   );
 }
+// @ts-ignore
 function LastSearch() {
   return <div></div>;
 }

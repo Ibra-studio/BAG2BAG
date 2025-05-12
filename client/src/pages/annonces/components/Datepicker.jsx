@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { addDays, format } from "date-fns";
+// @ts-ignore
+import React from "react";
+// @ts-ignore
+import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
+// @ts-ignore
 import { Button } from "@/components/ui/button";
+// @ts-ignore
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
+  // @ts-ignore
 } from "@/components/ui/popover";
+// @ts-ignore
 import { ReactComponent as Calendrier } from "@/assets/icons/CalendrierIcon.svg";
 
 // Utilitaire pour concaténer les classes (si tu utilises Tailwind)
@@ -16,12 +22,7 @@ function cn(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DatePicker({ className }) {
-  const [date, setDate] = useState({
-    from: new Date(), // Date du moment
-    to: addDays(new Date(), 20), // 20 jours après la date du moment
-  });
-
+export default function DatePicker({ className, date, setDate }) {
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -33,13 +34,13 @@ export default function DatePicker({ className }) {
               !date && "text-muted-foreground"
             )}
           >
-            <CalendarIcon className="mr-2 h-[30px] w-[30px]" />
+            <CalendarIcon className="mr-2 !h-9 !w-9 text-[#525E87]" />
             {date?.from ? (
               date.to ? (
-                <>
+                <p className="text-Secondary">
                   {format(date.from, "LLL dd, yyyy")} -{" "}
                   {format(date.to, "LLL dd, yyyy")}
-                </>
+                </p>
               ) : (
                 format(date.from, "LLL dd, yyyy")
               )
@@ -48,7 +49,7 @@ export default function DatePicker({ className }) {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto p-0 text-roboto " align="start">
           <Calendar
             initialFocus
             mode="range"

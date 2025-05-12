@@ -9,7 +9,7 @@ import { ReactComponent as DiscIcon } from "@/assets/icons/disconnect-icon.svg";
 import BtnPrimary from "./Btnprim";
 
 export default function Navbar({ children, setShowModal }) {
-  const Isloggin = false;
+  const Isloggin = true;
   return (
     <div>
       <div className="p-5  2xl:mx-[150px] xl:mx-[50px]  md:mx-[40px]  sm:mx-[20px] hidden sm:!flex   gap-[20px] justify-between items-center border-b-solid border-b-[0.3px] border-b-[#000000]">
