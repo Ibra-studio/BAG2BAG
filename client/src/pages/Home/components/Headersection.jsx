@@ -25,8 +25,8 @@ import "@/assets/global.css";
 import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore
 import BtnSecondary from "@/components/ui/Btnsec";
-import Modal from "../../../components/modal";
-import Login from "../../Auth/login";
+
+import { Link } from "react-router-dom";
 export default function HeaderSection() {
   return (
     <section className="flex flex-col gap-[50px] items-center justify-center pt-[100px] md:pt-40 header-section ">
@@ -50,7 +50,7 @@ export default function HeaderSection() {
           </BtnPrimary>
           <BtnSecondary>
             <IconSearh />
-            Voir les annonces
+            <Link to="/annonces"> Voir les annonces</Link>
           </BtnSecondary>
         </div>
       </div>

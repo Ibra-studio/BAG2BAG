@@ -5,12 +5,16 @@ import Input from "@/components/form/Input";
 import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore
 import ProfilePhotoSelector from "@/components/form/ProfilePhotoSelector";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [tel, setTel] = useState("");
   const [image, setImage] = useState(null);
   function handleSignUp(e) {
     e.preventDefault();
@@ -36,12 +40,51 @@ function SignUp() {
           </p>
           <ProfilePhotoSelector image={image} setImage={setImage} />
           <Input
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            label="Nom complet"
-            placeholder=" Entrez votre nom complet"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
+            type="text"
+            label="Nom"
+            placeholder=" Entrez votre nom"
           />
-
+          <Input
+            value={prenom}
+            onChange={(e) => setPrenom(e.target.value)}
+            type="text"
+            label="Prenom"
+            placeholder=" Entrez votre prenom"
+          />
+          <div className="flex  flex-col gap-2">
+            <label className="text-[18px]">Numero de telephone</label>
+            <PhoneInput
+              country={"ma"} // Sénégal par défaut
+              onlyCountries={[
+                "sn",
+                "ci",
+                "ml",
+                "ng",
+                "gh",
+                "cm",
+                "tg",
+                "bj",
+                "bf",
+                "ma",
+                "ml",
+              ]}
+              value={tel}
+              onChange={(value) => setTel(value)}
+              inputClass="focus:ring-2 focus:ring-btn-primary"
+              inputStyle={{
+                width: "100%",
+                fontSize: "20px",
+                backgroundColor: "#F7F7F7",
+                border: "none",
+                paddingTop: "30px",
+                paddingBottom: "30px",
+              }}
+              dropdownStyle={{}}
+              autoFormat={true} // optionnel pour formatage visuel
+            />
+          </div>
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}

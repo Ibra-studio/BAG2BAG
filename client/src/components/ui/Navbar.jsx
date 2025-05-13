@@ -7,14 +7,16 @@ import { ReactComponent as UserIcon } from "@/assets/icons/User.svg";
 import { ReactComponent as DiscIcon } from "@/assets/icons/disconnect-icon.svg";
 // @ts-ignore
 import BtnPrimary from "./Btnprim";
-
+import { Link } from "react-router-dom";
 export default function Navbar({ children, setShowModal }) {
-  const Isloggin = true;
+  const Isloggin = false;
   return (
     <div>
       <div className="p-5  2xl:mx-[150px] xl:mx-[50px]  md:mx-[40px]  sm:mx-[20px] hidden sm:!flex   gap-[20px] justify-between items-center border-b-solid border-b-[0.3px] border-b-[#000000]">
         <a href="/">
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
         </a>
         <div>
           {Isloggin ? (

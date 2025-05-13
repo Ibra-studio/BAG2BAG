@@ -1,8 +1,5 @@
-// @ts-ignore
 import React, { useState } from "react";
 import Navbar from "../../components/ui/Navbar";
-// @ts-ignore
-import Footer from "../../components/ui/Footer";
 import { addDays } from "date-fns";
 import "../../assets/global.css";
 // @ts-ignore
@@ -212,7 +209,7 @@ export default function PostPage() {
 
   const [currentPage, setCurrentPage] = useState("login");
   return (
-    <div>
+    <>
       <Navbar setShowModal={setShowModal}>
         <BtnPrimary>S'inscrire / Se connecter</BtnPrimary>
       </Navbar>
@@ -243,7 +240,7 @@ export default function PostPage() {
         <div className="spacer h-10"></div>
         <Postlist />
       </section>
-    </div>
+    </>
   );
 }
 
@@ -275,7 +272,7 @@ function SearchBar() {
     setKg(0);
   }
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-row  Search-Bar">
           <div className="flex flex-row bg-white px-[10px] py-[20px] rounded-l-[30px] rounded-r-[0px]">
@@ -341,7 +338,7 @@ function SearchBar() {
           </button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
 // @ts-ignore
