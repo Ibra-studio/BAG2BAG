@@ -13,7 +13,8 @@ import supabase from "@/services/supabaseClient";
 import { uploadProfileImage } from "@/utils/uploadProfileImage";
 import { useNavigate } from "react-router";
 
-export default function SignUp() {
+import { showSuccessToast } from "../../utils/toast";
+export default function SignUp({ navigateTo }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -48,18 +49,18 @@ export default function SignUp() {
       const userId = data.user.id;
       console.log("ID de l'utilisateur →", userId);
 
-      // let imageUrl = null;
+      let imageUrl = null;
 
-      // if (image) {
-      //   try {
-      //     imageUrl = await uploadProfileImage(image, userId);
-      //     console.log("URL de l'image de profil →", imageUrl);
-      //   } catch (error) {
-      //     setMessage("Erreur lors de l'upload de l'image.");
-      //     console.error(error);
-      //     return;
-      //   }
-      // }
+      if (image) {
+        try {
+          imageUrl = await uploadProfileImage(image, userId);
+          console.log("URL de l'image de profil →", imageUrl);
+        } catch (error) {
+          setMessage("Erreur lors de l'upload de l'image.");
+          console.error(error);
+          return;
+        }
+      }
 
       const { error: insertError } = await supabase.from("users").insert([
         {
@@ -68,6 +69,7 @@ export default function SignUp() {
           prenom: prenom,
           email: email,
           numero_tel: tel,
+          photo_profil: imageUrl,
         },
       ]);
 
@@ -75,8 +77,9 @@ export default function SignUp() {
         console.log(insertError);
         setMessage("Erreur lors de l'insertion dans la table users");
       }
+      showSuccessToast("Inscription réussie 🎉");
+      navigate(navigateTo);
     }
-    navigate("/annonces");
   }
   return (
     <div className="">

@@ -22,6 +22,7 @@ import Login from "@/pages/Auth/login";
 // @ts-ignore
 import SignUp from "@/pages/Auth/signup";
 import getPosts from "../../services/apiPosts";
+import { Toaster } from "react-hot-toast";
 
 const data = [
   {
@@ -213,6 +214,7 @@ export default function PostPage() {
 
   return (
     <>
+      <Toaster />
       <Navbar setShowModal={setShowModal}>
         <BtnPrimary>S'inscrire / Se connecter</BtnPrimary>
       </Navbar>

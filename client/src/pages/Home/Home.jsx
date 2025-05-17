@@ -16,6 +16,7 @@ import SignUp from "@/pages/Auth/SignUp";
 function Home() {
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
+  const [navigateTo, setNavigateTo] = useState("/annonces");
 
   // useEffect(() => {
   //   fetch("http://localhost:5000/api")
@@ -37,7 +38,7 @@ function Home() {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           >
-            <Login />
+            <Login navigateTo={navigateTo} />
           </Modal>
         ) : (
           <Modal
@@ -46,10 +47,13 @@ function Home() {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           >
-            <SignUp />
+            <SignUp navigateTo={navigateTo} />
           </Modal>
         ))}
-      <HeaderSection />
+      <HeaderSection
+        setShowModal={setShowModal}
+        setNavigateTo={setNavigateTo}
+      />
       <Painsection />
       <Timelinesection />
       {/* <Howwork /> */}

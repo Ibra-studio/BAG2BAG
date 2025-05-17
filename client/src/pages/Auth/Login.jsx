@@ -3,11 +3,15 @@ import "@/assets/global.css";
 // @ts-ignore
 import Input from "@/components/form/Input";
 import BtnPrimary from "../../components/ui/Btnprim";
-export default function Login() {
+import supabase from "../../services/supabaseClient";
+import { useNavigate } from "react-router";
+
+import { showSuccessToast } from "../../utils/toast";
+export default function Login({ navigateTo }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   //handle login form submit
   async function handlelogin(e) {
     e.preventDefault();
@@ -20,7 +24,20 @@ export default function Login() {
       setError("Veuillez entrer votre mot de passe");
       return;
     }
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      setError(error.message);
+    }
+    if (data) {
+      console.log("succes");
+    }
     setError("");
+    showSuccessToast("Connexion réussie 🎉");
+
+    navigate(navigateTo);
   }
   return (
     <div>

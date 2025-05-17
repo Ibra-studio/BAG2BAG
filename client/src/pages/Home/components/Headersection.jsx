@@ -26,8 +26,22 @@ import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore
 import BtnSecondary from "@/components/ui/Btnsec";
 
-import { Link } from "react-router-dom";
-export default function HeaderSection() {
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import supabase from "../../../services/supabaseClient";
+export default function HeaderSection({ setShowModal, setNavigateTo }) {
+  const navigate = useNavigate();
+  async function showCreateAnnonce() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      navigate("/create-annonce");
+    } else {
+      setNavigateTo("/create-annonce");
+      setShowModal(true);
+    }
+  }
   return (
     <section className="flex flex-col gap-[50px] items-center justify-center pt-[100px] md:pt-40 header-section ">
       <div className="flex flex-col gap-[50px]  px-[15px]   header-text  text-center  ">
@@ -44,10 +58,12 @@ export default function HeaderSection() {
           à envoyer des colis
         </p>
         <div className="flex flex-col lg:flex-row gap-[20px] justify-center items-center">
-          <BtnPrimary>
-            <IconLiv />
-            Transporter un colis
-          </BtnPrimary>
+          <div onClick={showCreateAnnonce}>
+            <BtnPrimary>
+              <IconLiv />
+              Transporter un colis
+            </BtnPrimary>
+          </div>
           <BtnSecondary>
             <IconSearh />
             <Link to="/annonces"> Voir les annonces</Link>

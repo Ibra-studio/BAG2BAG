@@ -15,23 +15,34 @@ export default function Navbar({ children, setShowModal }) {
   useEffect(() => {
     async function fechUser() {
       const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        setIsLoggin(true);
-        const { data, error } = await supabase
-          .from("users")
-          .select("photo_profil")
-          .eq("id", user.id)
-          .single();
-        if (error) {
-          throw new Error("Failed to fetch user data");
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user) {
+          setIsLoggin(true);
+          const { data, error } = await supabase
+            .from("users")
+            .select("photo_profil")
+            .eq("id", user.id)
+            .single();
+
+          if (error) {
+            throw new Error("Failed to fetch user data");
+          }
+          if (data?.photo_profil) {
+            setImageUrl(data.photo_profil);
+            console.log("l'url de l'image est ->", data.photo_profil);
+          }
+        } else {
+          setIsLoggin(false);
         }
-        if (data?.photo_profil) {
-          setImageUrl(data.photo_profil);
-        }
+        // ok !
       } else {
-        setIsLoggin(false);
+        console.log("Aucune session active : utilisateur non connecté");
       }
     }
     fechUser();
