@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/ui/Navbar";
 import HeaderSection from "./components/Headersection";
 import Painsection from "./components/Painsection";
@@ -12,11 +12,18 @@ import Modal from "@/components/modal";
 // @ts-ignore
 import Login from "@/pages/Auth/login";
 // @ts-ignore
-import SignUp from "@/pages/Auth/signup";
+import SignUp from "@/pages/Auth/SignUp";
 function Home() {
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
 
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/api")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data); // tu verras les fruits dans la console
+  //     });
+  // }, []);
   return (
     <div className="w-[100%]">
       <Navbar setShowModal={setShowModal}>

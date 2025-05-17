@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-function Input({ value, onChange, label, type, placeholder }) {
+function Input({ value, onChange, label, type, placeholder, isRequired }) {
   const [showPassword, setShowPassword] = useState(false);
 
   function toggleShowPassword() {
@@ -22,6 +22,7 @@ function Input({ value, onChange, label, type, placeholder }) {
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          required={isRequired ? true : false}
         />
 
         {/* Icône placée en absolute à droite */}

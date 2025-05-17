@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/ui/Navbar";
 import { addDays } from "date-fns";
 import "../../assets/global.css";
@@ -21,6 +21,8 @@ import Modal from "@/components/modal";
 import Login from "@/pages/Auth/login";
 // @ts-ignore
 import SignUp from "@/pages/Auth/signup";
+import getPosts from "../../services/apiPosts";
+
 const data = [
   {
     depart: "Sénégal,Dakar",
@@ -208,6 +210,7 @@ export default function PostPage() {
   const [showModal, setShowModal] = useState(false);
 
   const [currentPage, setCurrentPage] = useState("login");
+
   return (
     <>
       <Navbar setShowModal={setShowModal}>

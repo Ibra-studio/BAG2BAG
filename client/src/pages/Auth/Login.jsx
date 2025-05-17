@@ -32,6 +32,7 @@ export default function Login() {
             label={"Email "}
             type="email"
             placeholder="Entrez votre email "
+            isRequired={true}
           />
           <Input
             value={password}
@@ -39,6 +40,7 @@ export default function Login() {
             label={"Mot de passe"}
             type="password"
             placeholder="Mininum 8 charactères"
+            isRequired={true}
           />
 
           {error && <p className="text-red-500 ">{error}</p>}
