@@ -12,7 +12,7 @@ function Input({ value, onChange, label, type, placeholder, isRequired }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-[18px]">{label}</label>
+      <label className="text-[20px]">{label}</label>
 
       {/* Wrapper avec position relative */}
       <div className="relative">

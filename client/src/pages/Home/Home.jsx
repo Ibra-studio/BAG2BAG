@@ -13,6 +13,7 @@ import Modal from "@/components/modal";
 import Login from "@/pages/Auth/login";
 // @ts-ignore
 import SignUp from "@/pages/Auth/SignUp";
+
 function Home() {
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
@@ -50,6 +51,7 @@ function Home() {
             <SignUp navigateTo={navigateTo} />
           </Modal>
         ))}
+
       <HeaderSection
         setShowModal={setShowModal}
         setNavigateTo={setNavigateTo}
