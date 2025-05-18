@@ -21,7 +21,7 @@ import Modal from "@/components/modal";
 import Login from "@/pages/Auth/login";
 // @ts-ignore
 import SignUp from "@/pages/Auth/signup";
-import getPosts from "../../services/apiPosts";
+
 import { Toaster } from "react-hot-toast";
 
 const data = [

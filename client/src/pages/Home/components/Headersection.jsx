@@ -36,9 +36,9 @@ export default function HeaderSection({ setShowModal, setNavigateTo }) {
     } = await supabase.auth.getSession();
 
     if (session) {
-      navigate("/annonces/creer");
+      navigate("/annonces/create");
     } else {
-      setNavigateTo("/annonces/creer");
+      setNavigateTo("/annonces/create");
       setShowModal(true);
     }
   }
