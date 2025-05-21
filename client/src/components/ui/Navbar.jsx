@@ -8,54 +8,63 @@ import { ReactComponent as DiscIcon } from "@/assets/icons/disconnect-icon.svg";
 
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../services/supabaseClient";
+
 export default function Navbar({ children, setShowModal }) {
   const [Isloggin, setIsLoggin] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
-  useEffect(() => {
-    async function fechUser() {
+
+  async function fetchUser() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
       const {
-        data: { session },
-      } = await supabase.auth.getSession();
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        setIsLoggin(true);
+        const { data, error } = await supabase
+          .from("users")
+          .select("photo_profil")
+          .eq("id", user.id)
+          .single();
 
-      if (session) {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (user) {
-          setIsLoggin(true);
-          const { data, error } = await supabase
-            .from("users")
-            .select("photo_profil")
-            .eq("id", user.id)
-            .single();
-
-          if (error) {
-            throw new Error("Failed to fetch user data");
-          }
-          if (data?.photo_profil) {
-            setImageUrl(data.photo_profil);
-            console.log("l'url de l'image est ->", data.photo_profil);
-          }
-        } else {
-          setIsLoggin(false);
+        if (error) {
+          throw new Error("Failed to fetch user data");
         }
-        // ok !
+        if (data?.photo_profil) {
+          setImageUrl(data.photo_profil);
+          console.log("l'url de l'image est ->", data.photo_profil);
+        }
       } else {
-        console.log("Aucune session active : utilisateur non connecté");
+        setIsLoggin(false);
       }
+      // ok !
+    } else {
+      console.log("Aucune session active : utilisateur non connecté");
     }
-    fechUser();
+  }
+  useEffect(() => {
+    fetchUser();
+    const { data: listener } = supabase.auth.onAuthStateChange(() => {
+      fetchUser();
+    });
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
   }, []);
+
   function handleLogout() {
     supabase.auth.signOut();
     setIsLoggin(false);
-    navigate("/");
+    navigate("/app");
   }
   return (
     <div>
       <div className="p-5  2xl:mx-[150px] xl:mx-[50px]  md:mx-[40px]  sm:mx-[20px] hidden sm:!flex   gap-[20px] justify-between items-center border-b-solid border-b-[0.3px] border-b-[#000000]">
-        <Link to="/">
+        <Link to="/app">
           <Logo />
         </Link>
 
@@ -70,7 +79,7 @@ export default function Navbar({ children, setShowModal }) {
                 >
                   <div className="w-full rounded-full">
                     <img
-                      alt="Tailwind CSS Navbar component"
+                      alt="Profile picture"
                       src={
                         Isloggin
                           ? imageUrl
@@ -119,11 +128,15 @@ export default function Navbar({ children, setShowModal }) {
         </div>
       </div>
       {/* Mobile navigation */}
-      <div className="navbar bg-base-100 flex sm:hidden shadow-sm pt-7 px-[15px]">
+      <div
+        className={`navbar bg-base-100 flex ${
+          Isloggin ? "" : "flex-col"
+        } gap-3 sm:hidden shadow-sm pt-7 px-[15px]`}
+      >
         <div className="flex-1">
-          <a className="">
+          <Link to="/app">
             <Logo />
-          </a>
+          </Link>
         </div>
         {Isloggin ? (
           <div className="flex gap-2">
@@ -135,8 +148,12 @@ export default function Navbar({ children, setShowModal }) {
               >
                 <div className="w-10 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    alt="profile picture"
+                    src={
+                      Isloggin
+                        ? imageUrl
+                        : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    }
                   />
                 </div>
               </div>
@@ -151,7 +168,10 @@ export default function Navbar({ children, setShowModal }) {
                   <a className="text-[16px] text-secondary">Mes annonces</a>
                 </li>
                 <li>
-                  <div className="flex justify-between gap-2 items-center">
+                  <div
+                    className="flex justify-between gap-2 items-center"
+                    onClick={handleLogout}
+                  >
                     <a className="text-[16px] text-secondary">Se deconnecter</a>
                     <DiscIcon className="text-black" />
                   </div>

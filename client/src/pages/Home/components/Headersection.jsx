@@ -30,15 +30,16 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import supabase from "../../../services/supabaseClient";
 export default function HeaderSection({ setShowModal, setNavigateTo }) {
   const navigate = useNavigate();
+
   async function showCreateAnnonce() {
     const {
       data: { session },
     } = await supabase.auth.getSession();
 
     if (session) {
-      navigate("/annonces/create");
+      navigate("/app/annonces/create");
     } else {
-      setNavigateTo("/annonces/create");
+      setNavigateTo("/app/annonces/create");
       setShowModal(true);
     }
   }
@@ -66,7 +67,7 @@ export default function HeaderSection({ setShowModal, setNavigateTo }) {
           </div>
           <BtnSecondary>
             <IconSearh />
-            <Link to="/annonces"> Voir les annonces</Link>
+            <Link to="/app/annonces"> Voir les annonces</Link>
           </BtnSecondary>
         </div>
       </div>

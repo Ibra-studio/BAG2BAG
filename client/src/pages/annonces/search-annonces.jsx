@@ -23,6 +23,7 @@ import Login from "@/pages/Auth/login";
 import SignUp from "@/pages/Auth/signup";
 
 import { Toaster } from "react-hot-toast";
+import { useModal } from "../../context/ModalContext";
 
 const data = [
   {
@@ -208,16 +209,11 @@ const data = [
 ];
 
 export default function PostPage() {
-  const [showModal, setShowModal] = useState(false);
-
-  const [currentPage, setCurrentPage] = useState("login");
+  const { showModal, setShowModal, currentPage, setCurrentPage } = useModal();
 
   return (
     <>
       <Toaster />
-      <Navbar setShowModal={setShowModal}>
-        <BtnPrimary>S'inscrire / Se connecter</BtnPrimary>
-      </Navbar>
       {showModal &&
         (currentPage === "login" ? (
           <Modal
@@ -278,44 +274,49 @@ function SearchBar() {
   }
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-row  Search-Bar">
-          <div className="flex flex-row bg-white px-[10px] py-[20px] rounded-l-[30px] rounded-r-[0px]">
-            <div className="flex flex-row gap-[3px] items-center  border-r-1 justify-center">
+      <form
+        onSubmit={handleSubmit}
+        // className="w-full flex justify-center items-center " en bas de xl
+      >
+        <div className="flex flex-col Search-Bar xl:flex-row w-[80%] xl:w- ">
+          {" "}
+          {/*//en bas de xl w-[80%]*/}
+          <div className="flex flex-col bg-white px-[10px] py-[20px] xl:rounded-l-[30px] gap-4 rounded-r-[0px] xl:flex-row xl:gap-0">
+            <div className="flex flex-row xl:gap-[3px] gap-[2px] items-center  justify-start border-r-1  xl:justify-center ">
               <Ellipse />
               <input
                 type="text"
                 placeholder="Depart"
                 value={depart}
                 onChange={({ target }) => setDepart(target.value)}
-                className="focus:outline-none text-[20px] text--roboto "
+                className="focus:outline-none text-[20px] text--roboto " //en bas de xl w-full
               />
             </div>
-            <div className="flex flex-row gap-[3px] ml-2 items-center   border-r-1 justify-center">
+            <div className="flex flex-row xl:gap-[3px]  gap-[2px] xl:ml-2  items-center   border-r-1 justify-start xl:justify-center ">
               <Ellipse />
               <input
                 type="text"
                 placeholder="Destination"
                 value={destination}
                 onChange={({ target }) => setDestination(target.value)}
-                className="focus:outline-none text-[20px] text-roboto "
+                className="focus:outline-none text-[20px] text-roboto " // en bas de xl w-full
               />
             </div>
             <div>
               <DatePicker
-                className={"text-roboto"}
+                className={"text-roboto "}
                 date={date}
                 setDate={setDate}
               />
             </div>
             <div
-              className="flex flex-col gap-[3px]  ml-2  items-center justify-center relative "
+              className="flex flex-col gap-[3px]  xl:ml-2  items-center !justify-between xl:justify-center xl:items-center relative "
               onClick={toggleDropdown}
             >
-              <div className="flex flex-row gap-[10px] items-center justify-center text-[20px] text-Secondary">
+              <div className="flex flex-row gap-[10px] items-center xl:justify-center  !justify-between text-[20px] text-Secondary">
                 <KgIcon />{" "}
                 <input
-                  className="w-[30px]"
+                  className="xl:w-[30px] "
                   type="text"
                   value={Kg}
                   placeholder="kg"
@@ -338,7 +339,7 @@ function SearchBar() {
               )}
             </div>
           </div>
-          <button className="bg-btn-primary flex flex-row gap-[5px] justify-center items-center px-[10px] py-[20px] text-[20px] hover:cursor-pointer hover:bg-btn-primary/80 rounded-l-[0px] rounded-r-[30px]">
+          <button className="bg-btn-primary flex flex-row gap-[5px] justify-center items-center px-[10px] py-[20px] text-[20px] hover:cursor-pointer hover:bg-btn-primary/80 xl:rounded-l-[0px] rounded-tl-[0px] rounded-tr-[0px]  xl:rounded-r-[30px] rounded-l-[30px] rounded-r-[30px] ">
             <Search /> Rechercher
           </button>
         </div>
@@ -352,11 +353,11 @@ function LastSearch() {
 }
 function Filter() {
   return (
-    <div className="flex flex-col w-[1000px] gap-5">
+    <div className="flex flex-col lg:w-[1000px] w-[80%] gap-5">
       <div className="flex  flex-row justify-start  items-center">
         <p className="text-[20px]">Trier par :</p>
       </div>
-      <div className="border-t-1 flex flex-row justify-around border-secondary pt-5 ">
+      <div className="border-t-1 flex md:flex-row  flex-col items-center  justify-between md:justify-around border-secondary pt-5 ">
         <div className="flex flex-row gap-2 items-center text-[20px]">
           {" "}
           <input
@@ -401,17 +402,17 @@ function Postlist() {
 
 function Post({ item }) {
   return (
-    <div className="w-[1000px] h-[196] bg-white flex flex-col justify-between  gap-[50px] rounded-[30px] p-[30px] shadow-sm">
+    <div className="xl:w-[1000px] w-[90%]  h-[196] bg-white flex flex-col justify-between  gap-[50px] rounded-[30px] p-[30px] shadow-sm">
       <div className="flex justify-between items-start">
-        <div className="flex flex-col gap-0">
-          <div className="flex flex-row  items-center gap-0 ">
+        <div className="flex md:flex-col flex-row md:gap-0 gap-3">
+          <div className="flex md:flex-row  flex-col items-center  gap-0">
             <div className="rounded-[50%] border-[1.5px] border-black w-[15px] h-[15px] "></div>
-            <div className="w-[300px] h-[1.5px] bg-black  relative">
+            <div className="md:!w-[300px] w-[1.5px] h-[100px]  md:h-[1.5px] bg-black  relative">
               <Plane className=" absolute z-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
             </div>
             <div className="rounded-[100%] border-[1.5px] border-black w-[15px] h-[15px] "></div>
           </div>
-          <div className="flex justify-between items-center gap-[15px] ">
+          <div className="flex md:flex-row  flex-col justify-between items-center gap-[15px] ">
             <p className="text-[16px]"> {item.depart}</p>
             <p className="text-[16px]"> {item.destination}</p>
           </div>
@@ -432,7 +433,7 @@ function Post({ item }) {
             <p className="text-secondary">{item.profession}</p>
           </div>
         </div>
-        <div className="flex flex-row gap-5">
+        <div className="flex xl:flex-row flex-col gap-5">
           <p>
             {" "}
             Date du voyage :{" "}

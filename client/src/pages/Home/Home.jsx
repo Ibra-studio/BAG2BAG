@@ -13,11 +13,18 @@ import Modal from "@/components/modal";
 import Login from "@/pages/Auth/login";
 // @ts-ignore
 import SignUp from "@/pages/Auth/SignUp";
+import { useModal } from "../../context/ModalContext";
 
+useModal;
 function Home() {
-  const [showModal, setShowModal] = useState(false);
-  const [currentPage, setCurrentPage] = useState("login");
-  const [navigateTo, setNavigateTo] = useState("/annonces");
+  const {
+    showModal,
+    setShowModal,
+    currentPage,
+    setCurrentPage,
+    navigateTo,
+    setNavigateTo,
+  } = useModal();
 
   // useEffect(() => {
   //   fetch("http://localhost:5000/api")
@@ -28,9 +35,6 @@ function Home() {
   // }, []);
   return (
     <div className="w-[100%]">
-      <Navbar setShowModal={setShowModal}>
-        <BtnPrimary>S'inscrire / Se connecter</BtnPrimary>
-      </Navbar>
       {showModal &&
         (currentPage === "login" ? (
           <Modal

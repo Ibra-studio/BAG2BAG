@@ -24,13 +24,13 @@ function cn(...classes) {
 
 export default function DatePicker({ className, date, setDate }) {
   return (
-    <div className={cn("grid gap-2", className)}>
+    <div className={cn("grid gap-2 w-full ", className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             className={cn(
-              "w-[300px] h-full bg-transparent text-black text-roboto shadow-none border-none px-0 justify-start text-left font-normal text-lg hover:bg-transparent",
+              "xl:w-[300px]  w-full    h-full bg-transparent text-black text-roboto shadow-none border-none px-0 xl:!justify-start text-left font-normal text-lg hover:bg-transparent !flex !p-0   !justify-start   xl:ml-2 ",
               !date && "text-muted-foreground"
             )}
           >

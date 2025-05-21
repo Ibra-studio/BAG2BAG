@@ -10,7 +10,7 @@ function Notfound() {
         <h2 className="text-[200px] text-btn-primary">404</h2>
         <h3>Ooops ! page not found</h3>
         <BtnPrimary className="">
-          <Link to="/">Go back Home</Link>
+          <Link to="/app">Go back Home</Link>
         </BtnPrimary>
       </div>
     </div>

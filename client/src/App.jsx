@@ -1,17 +1,24 @@
-import "./assets/global.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React from "react";
+
+import "./assets/global.css";
 import Home from "./pages/Home/Home";
 import PostPage from "../src/pages/annonces/search-annonces";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CreateAnnonces from "./pages/annonces/components/form/CreateAnnonces";
 import Notfound from "./pages/Notfound";
+import Dashboard from "./pages/Dashboard";
+import Layout from "./components/Layout";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/annonces" element={<PostPage />} />
-        <Route path="/annonces/create" element={<CreateAnnonces />} />
+        <Route path="/app" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="annonces" element={<PostPage />} />
+          <Route path="annonces/create" element={<CreateAnnonces />} />
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>

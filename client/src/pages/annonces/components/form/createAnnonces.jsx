@@ -1,28 +1,94 @@
+// @ts-ignore
 import React, { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Navbar from "../../../../components/ui/Navbar";
 // @ts-ignore
 import BtnPrimary from "@/components/ui/Btnprim";
+// @ts-ignore
 import Input from "@/components/form/Input";
 import CountrySelector from "../CountrySelector";
-
+// @ts-ignore
+import supabase from "@/services/supabaseClient";
+import { showErrorToast, showSuccessToast } from "../../../../utils/toast";
+import { useNavigate } from "react-router";
+// @ts-ignore
+import Modal from "@/components/modal";
+// @ts-ignore
+import Login from "@/pages/Auth/login";
+// @ts-ignore
+import SignUp from "@/pages/Auth/SignUp";
 function CreateAnnonces() {
-  const [showModal, setShowModal] = useState(false);
+  // @ts-ignore
+
   const [nbrKilo, setNbrKilo] = useState(0);
   const [prixParKilo, setPrixParKilo] = useState("");
+  // @ts-ignore
   const [Arrive, setArrive] = useState("");
+  // @ts-ignore
   const [Depart, setDepart] = useState("");
   const [dateDepart, setDateDepart] = useState("");
   const [description, setDescription] = useState("");
-  function handleCreateAnnonce(e) {
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+  async function handleCreateAnnonce(e) {
     e.preventDefault();
+    if (nbrKilo === 0) {
+      setMessage("le nombre de kilo doit être supérieure à 0");
+      return;
+    }
+    if (!dateDepart) {
+      setMessage(" veuillez saisir la date de depart");
+      return;
+    }
+    if (!Depart) {
+      setMessage(" veuillez saisir les champs de depart");
+      return;
+    }
+    if (!Arrive) {
+      setMessage(" veuillez saisir les champs de d'arrivée");
+      return;
+    }
+    let userId;
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        userId = user.id;
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+
+    const { data, error } = await supabase
+      .from("posts")
+      .insert([
+        {
+          nombreKiloDispo: nbrKilo,
+          prixParKilo: prixParKilo,
+          paysArrivee: Arrive,
+          paysDepart: Depart,
+          dateDepart: dateDepart,
+          idUser: userId,
+          description: description,
+        },
+      ])
+      .select();
+    if (data) {
+      showSuccessToast("Post crée avec succès 🎉");
+      navigate("/dashboard");
+    }
+    if (error) {
+      showErrorToast("erreur pour creer le post");
+      setMessage("");
+    }
+    //TODO:faire les error handling
   }
   return (
     <>
       <Toaster />
-      <Navbar setShowModal={setShowModal}>
-        <BtnPrimary>S'inscrire / Se connecter</BtnPrimary>
-      </Navbar>
+
       <div className="w-full flex justify-center pt-[100px]">
         <form onSubmit={handleCreateAnnonce}>
           <div className="bg-white w-[1000px] flex flex-col p-10 gap-4">
@@ -65,7 +131,7 @@ function CreateAnnonces() {
                 className="bg-[#F7F7F7] text-[20px] p-5"
               ></textarea>
             </div>
-
+            {message && <p className="text-red-500 ">{message}</p>}
             <BtnPrimary className="flex justify-center">Creer</BtnPrimary>
           </div>
         </form>
