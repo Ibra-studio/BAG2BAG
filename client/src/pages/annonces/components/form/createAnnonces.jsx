@@ -11,12 +11,7 @@ import CountrySelector from "../CountrySelector";
 import supabase from "@/services/supabaseClient";
 import { showErrorToast, showSuccessToast } from "../../../../utils/toast";
 import { useNavigate } from "react-router";
-// @ts-ignore
-import Modal from "@/components/modal";
-// @ts-ignore
-import Login from "@/pages/Auth/login";
-// @ts-ignore
-import SignUp from "@/pages/Auth/SignUp";
+
 function CreateAnnonces() {
   // @ts-ignore
 
@@ -77,7 +72,7 @@ function CreateAnnonces() {
       .select();
     if (data) {
       showSuccessToast("Post crée avec succès 🎉");
-      navigate("/dashboard");
+      navigate("/app/dashboard");
     }
     if (error) {
       showErrorToast("erreur pour creer le post");

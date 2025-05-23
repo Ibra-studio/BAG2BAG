@@ -36,7 +36,6 @@ export default function Navbar({ children, setShowModal }) {
         }
         if (data?.photo_profil) {
           setImageUrl(data.photo_profil);
-          console.log("l'url de l'image est ->", data.photo_profil);
         }
       } else {
         setIsLoggin(false);
@@ -81,7 +80,7 @@ export default function Navbar({ children, setShowModal }) {
                     <img
                       alt="Profile picture"
                       src={
-                        Isloggin
+                        imageUrl
                           ? imageUrl
                           : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                       }
@@ -117,13 +116,7 @@ export default function Navbar({ children, setShowModal }) {
               </div>
             </div>
           ) : (
-            <button
-              className="bg-transparent border-none"
-              onClick={() => setShowModal((prev) => !prev)}
-            >
-              {" "}
-              {children}
-            </button>
+            <div onClick={() => setShowModal((prev) => !prev)}>{children}</div>
           )}
         </div>
       </div>
@@ -150,7 +143,7 @@ export default function Navbar({ children, setShowModal }) {
                   <img
                     alt="profile picture"
                     src={
-                      Isloggin
+                      imageUrl
                         ? imageUrl
                         : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                     }
@@ -180,13 +173,7 @@ export default function Navbar({ children, setShowModal }) {
             </div>
           </div>
         ) : (
-          <button
-            className="bg-transparent border-none"
-            onClick={() => setShowModal((prev) => !prev)}
-          >
-            {" "}
-            {children}
-          </button>
+          <div onClick={() => setShowModal((prev) => !prev)}>{children}</div>
         )}
       </div>
     </div>
