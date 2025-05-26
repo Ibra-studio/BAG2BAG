@@ -4,6 +4,7 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import "./assets/global.css";
 import Home from "./pages/Home/Home";
 import PostPage from "../src/pages/annonces/search-annonces";
+// @ts-ignore
 import CreateAnnonces from "./pages/annonces/components/form/CreateAnnonces";
 import Notfound from "./pages/Notfound";
 import Dashboard from "./pages/Dashboard";

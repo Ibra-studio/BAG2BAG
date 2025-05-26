@@ -14,6 +14,7 @@ import { uploadProfileImage } from "@/utils/uploadProfileImage";
 import { useNavigate } from "react-router";
 
 import { showSuccessToast } from "../../utils/toast";
+import { useModal } from "../../context/ModalContext";
 export default function SignUp({ navigateTo }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +25,7 @@ export default function SignUp({ navigateTo }) {
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
+  const { setCurrentPage } = useModal();
   async function handleSignUp(e) {
     e.preventDefault();
 
@@ -170,6 +172,20 @@ export default function SignUp({ navigateTo }) {
           </BtnPrimary>
         </div>
       </form>
+      <button
+        className="text-center"
+        onClick={() =>
+          setCurrentPage((prev) => (prev === "login" ? "signup" : "login"))
+        }
+      >
+        <p>
+          Dejà membre ?
+          <span className=" text-green underline cursor-pointer">
+            {" "}
+            Connectez-vous ici
+          </span>
+        </p>
+      </button>
     </div>
   );
 }

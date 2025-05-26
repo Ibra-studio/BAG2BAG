@@ -5,8 +5,8 @@ export default function Modal({
   children,
   setShowModal,
   title,
-  currentPage,
   setCurrentPage,
+  className = "",
 }) {
   function handleToggleModal() {
     setShowModal((prev) => !prev);
@@ -18,7 +18,7 @@ export default function Modal({
       onClick={handleToggleModal}
     >
       <div
-        className="bg-white  p-6 rounded-lg shadow-lg w-full max-w-md relative "
+        className={`bg-white  p-6 rounded-lg shadow-lg w-full max-w-xl relative ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         <h4 className="text-center mb-[15px]">{title}</h4>
@@ -30,31 +30,6 @@ export default function Modal({
           <CloseIcon />
         </button>
         {children}
-        <button
-          className="text-center"
-          onClick={() =>
-            setCurrentPage((prev) => (prev === "login" ? "signup" : "login"))
-          }
-        >
-          {currentPage === "login" ? (
-            <p className="">
-              {" "}
-              Nouveau membre ?
-              <span className=" text-green underline cursor-pointer">
-                {" "}
-                Inscrivez-vous ici
-              </span>
-            </p>
-          ) : (
-            <p>
-              Dejà membre ?
-              <span className=" text-green underline cursor-pointer">
-                {" "}
-                Connectez-vous ici
-              </span>
-            </p>
-          )}
-        </button>
       </div>
     </div>
   );

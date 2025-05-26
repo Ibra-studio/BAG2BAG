@@ -8,7 +8,7 @@ import { ReactComponent as DiscIcon } from "@/assets/icons/disconnect-icon.svg";
 
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../services/supabaseClient";
-
+import defaultUser from "../../assets/images/default-user.png";
 export default function Navbar({ children, setShowModal }) {
   const [Isloggin, setIsLoggin] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -79,11 +79,7 @@ export default function Navbar({ children, setShowModal }) {
                   <div className="w-full rounded-full">
                     <img
                       alt="Profile picture"
-                      src={
-                        imageUrl
-                          ? imageUrl
-                          : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      }
+                      src={imageUrl ? imageUrl : defaultUser}
                     />
                   </div>
                 </div>

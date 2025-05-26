@@ -1,5 +1,5 @@
-import { useState } from "react";
 import React from "react";
+// @ts-ignore
 import { ReactComponent as VerifiedIcon } from "../../assets/icons/verifiedIcon.svg";
 export default function Avatar({ children, isVerified }) {
   return (

@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import { ReactComponent as Logo } from "../../assets/icons/logoFooter.svg";
 function Footer() {
   return (

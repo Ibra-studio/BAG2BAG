@@ -87,7 +87,7 @@ function CreateAnnonces() {
       <div className="w-full flex justify-center pt-[100px]">
         <form onSubmit={handleCreateAnnonce}>
           <div className="bg-white w-[1000px] flex flex-col p-10 gap-4">
-            <h4 className="text-center mb-10">Creer une annonce</h4>
+            <h4 className="text-center mb-10">Créez une annonce</h4>
             <Input
               value={nbrKilo}
               onChange={({ target }) => setNbrKilo(target.value)}

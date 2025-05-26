@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useModal } from "../../context/ModalContext";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-
+import defaultUser from "@/assets/images/default-user.png";
 import Navbar from "../../components/ui/Navbar";
 import { addDays } from "date-fns";
 import "../../assets/global.css";
@@ -29,6 +29,7 @@ import SignUp from "@/pages/Auth/signup";
 import supabase from "../../services/supabaseClient";
 import { showErrorToast } from "../../utils/toast";
 import PostSkeleton from "./components/PostSkeleton";
+import Alerte from "./components/Alerte";
 
 // const data = [
 //   {
@@ -229,6 +230,18 @@ export default function PostPage() {
           >
             <Login />
           </Modal>
+        ) : currentPage === "alerte" ? (
+          <Modal
+            title={
+              "Saisissez votre adresse e-mail pour qu'on vous tienne au courant"
+            }
+            setShowModal={setShowModal}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            className=""
+          >
+            <Alerte />
+          </Modal>
         ) : (
           <Modal
             title={"Inscrivez-vous"}
@@ -251,10 +264,13 @@ export default function PostPage() {
 }
 
 function SearchBar() {
+  const [searchParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
-  const [Kg, setKg] = useState(0);
-  const [depart, setDepart] = useState("");
-  const [destination, setDestination] = useState("");
+  const [Kg, setKg] = useState(() => Number(searchParams.get("kg")) || 0);
+  const [depart, setDepart] = useState(() => searchParams.get("depart") || "");
+  const [destination, setDestination] = useState(
+    () => searchParams.get("destination") || ""
+  );
   const [error, setError] = useState("");
   const [date, setDate] = useState({
     from: new Date(), // Date du moment
@@ -291,7 +307,7 @@ function SearchBar() {
           {" "}
           {/*//en bas de xl w-[80%]*/}
           <div className="flex flex-col bg-white px-[10px] py-[5px] xl:rounded-l-[30px] gap-4 rounded-r-[0px] xl:flex-row xl:gap-0">
-            <div className="flex flex-row xl:gap-[3px] gap-[2px] items-center px-2 justify-start border-r-1  xl:justify-center hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
+            <div className="flex flex-row xl:gap-[3px] gap-[2px] items-center px-2 justify-start border-r-1  xl:justify-center  hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
               <Ellipse />
               <input
                 type="text"
@@ -299,7 +315,7 @@ function SearchBar() {
                 value={depart}
                 required
                 onChange={({ target }) => setDepart(target.value)}
-                className="focus:outline-none text-[20px] text--roboto " //en bas de xl w-full
+                className="focus:outline-none text-[20px] text--roboto  " //en bas de xl w-full
               />
             </div>
             <div className="flex flex-row xl:gap-[3px]  gap-[2px] xl:ml-2  items-center  px-2 border-r-1 justify-start xl:justify-center  hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
@@ -375,6 +391,28 @@ function LastSearch() {
   return <div></div>;
 }
 function Filter() {
+  const [filterPrice, setFilterPrice] = useState(false);
+  const [filterVerified, setFilterVerified] = useState(false);
+  const [filterStudent, setFilterStudent] = useState(false);
+
+  useEffect(() => {
+    async function filterPost() {
+      try {
+        const { data, error } = await supabase
+          .from("posts")
+          .select(
+            "* , users (id, nom , prenom , photo_profil ,isVerified , profession )"
+          )
+          .ilike("paysDepart", `%${depart}%`)
+          .ilike("paysArrivee", `%${destination}%`)
+          .gte("dateDepart", dateFrom)
+          .lte("dateDepart", dateTo)
+          .gte("nombreKiloDispo", kilo)
+          .eq("isVerified", filterVerified);
+      } catch (error) {}
+    }
+    filterPost();
+  }, [filterVerified, filterPrice, filterStudent]);
   return (
     <div className="flex flex-col lg:w-[1000px] w-[80%] gap-5">
       <div className="flex  flex-row justify-start  items-center">
@@ -387,6 +425,8 @@ function Filter() {
             type="checkbox"
             className="w-[20px] h-[20px] text-green accent-green"
             name="prix"
+            checked={filterPrice}
+            onChange={() => setFilterPrice((v) => !v)}
           />
           <label htmlFor="prix">Prix le plus bas</label>
         </div>
@@ -396,6 +436,8 @@ function Filter() {
             type="checkbox"
             className="w-[20px] h-[20px] text-green accent-green"
             name="verified"
+            checked={filterVerified}
+            onChange={() => setFilterVerified((v) => !v)}
           />
           <label htmlFor="verified">Profil verifié </label>
         </div>
@@ -404,9 +446,11 @@ function Filter() {
           <input
             type="checkbox"
             className="w-[20px] h-[20px] text-green accent-green"
-            name="prix"
+            name="etudiant"
+            checked={filterStudent}
+            onChange={() => setFilterStudent((v) => !v)}
           />
-          <label htmlFor="">Profil étudiant</label>
+          <label htmlFor="etudiant">Profil étudiant</label>
         </div>
       </div>
     </div>
@@ -415,14 +459,20 @@ function Filter() {
 
 function Postlist() {
   const [searchParams] = useSearchParams();
-  const [Message, setMessage] = useState("");
+  const [Message, setMessage] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [post, setPost] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
 
+  const { showModal, setShowModal, setCurrentPage } = useModal();
+
+  function handleCreateAlerte() {
+    setCurrentPage("alerte");
+    setShowModal(true);
+  }
   useEffect(() => {
     if (searchParams.has("depart") && searchParams.has("destination")) {
-      setMessage("");
+      setMessage(false);
       const kilo = searchParams.get("kg");
       const depart = searchParams.get("depart");
       const destination = searchParams.get("destination");
@@ -441,7 +491,7 @@ function Postlist() {
       const { data, error } = await supabase
         .from("posts")
         .select(
-          "* , users (id, nom , prenom , photo_profil ,isVerified , profession )"
+          " * ,dateDepart, users (id, nom , prenom , photo_profil ,isVerified , profession )"
         )
         .ilike("paysDepart", `%${depart}%`)
         .ilike("paysArrivee", `%${destination}%`)
@@ -450,9 +500,7 @@ function Postlist() {
         .gte("nombreKiloDispo", kilo);
       if (data?.length === 0) {
         console.log("Résultats :", data);
-        setMessage(
-          " Pas de post correspondant à votre recherche pour le moment faites une autre recherche ou configurez une alerte "
-        );
+        setMessage(true);
       }
       setPost(data);
       console.log("Résultats :", data);
@@ -476,8 +524,14 @@ function Postlist() {
         post.map((item, index) => <Post key={index} item={item} />)}
 
       {Message && (
-        <div className=" w-full h-full flex justify-center items-center">
-          <p>{Message}</p>
+        <div className=" w-full h-full flex  flex-col gap-5 justify-center items-center">
+          <h2 className="text-[24px] text-center">
+            {" "}
+            Il n'y a pas encore de trajet disponible entre ces pays{" "}
+          </h2>
+          <div onClick={handleCreateAlerte}>
+            <BtnPrimary> Creer une alerte</BtnPrimary>
+          </div>
         </div>
       )}
     </div>
@@ -487,7 +541,7 @@ function Post({ item }) {
   const { users } = item;
   console.log(users);
   return (
-    <Link to={`${item.id}}`}>
+    <Link to={`${item.id}`}>
       <div className="xl:w-[1000px] w-[90%]  h-[196] bg-white flex flex-col justify-between  gap-[50px] rounded-[30px] p-[30px] shadow-sm  border-black border-2 hover:border-green hover:border-2 hover:shadow-0">
         <div className="flex justify-between items-start">
           <div className="flex md:flex-col flex-row md:gap-0 gap-3">
@@ -515,11 +569,7 @@ function Post({ item }) {
           <div className="flex flex-row  items-center justify-center gap-5">
             <Avatar isVerified={users.isVerified}>
               <img
-                src={
-                  users.photo_profil
-                    ? users.photo_profil
-                    : "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-                }
+                src={users.photo_profil ? users.photo_profil : defaultUser}
               />
             </Avatar>
             <div className="flex flex-col gap-[1px]">

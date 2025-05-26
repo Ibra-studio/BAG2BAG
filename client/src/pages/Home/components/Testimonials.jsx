@@ -21,7 +21,9 @@ export default function Testimonials() {
               C’est rapide, humain et moins cher."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -35,7 +37,9 @@ export default function Testimonials() {
               valises à moitié vides."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] 5 p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> George </h5>
                 <p className="text-[15px]"> SG TOGO kenitra</p>
@@ -49,7 +53,9 @@ export default function Testimonials() {
               C’est fluide et rassurant."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Lumière </h5>
                 <p className="text-[15px]"> SG Congo brazza Rabat</p>
@@ -67,7 +73,9 @@ export default function Testimonials() {
               nous.”
             </h2>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center justify-center ">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Alidji </h5>
                 <p className="text-[15px]"> SG MALI kenitra</p>
@@ -81,7 +89,9 @@ export default function Testimonials() {
               C’est rapide, humain et moins cher."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -95,7 +105,9 @@ export default function Testimonials() {
               C’est rapide, humain et moins cher."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -109,7 +121,9 @@ export default function Testimonials() {
               DHL."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Anicet </h5>
                 <p className="text-[15px]"> SG Gabon Mèknes</p>
@@ -123,7 +137,9 @@ export default function Testimonials() {
               C’est rapide, humain et moins cher."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -139,7 +155,9 @@ export default function Testimonials() {
               C’est rapide, humain et moins cher."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -153,7 +171,9 @@ export default function Testimonials() {
               C’est rapide, humain et moins cher."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] 5 p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -167,7 +187,9 @@ export default function Testimonials() {
               C’est rapide, humain et moins cher."
             </p>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -187,7 +209,9 @@ export default function Testimonials() {
               proin. Non hendrerit in vel ac diam.”
             </h2>
             <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center justify-center ">
-              <Avatar />
+              <Avatar>
+                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              </Avatar>
               <div className="flex flex-col">
                 <h5 className="text-[20px]"> Amadou </h5>
                 <p className="text-[15px]"> SG GUINÉE kenitra</p>
@@ -202,7 +226,10 @@ export default function Testimonials() {
                 C’est rapide, humain et moins cher."
               </p>
               <div className="border-t-1 border-{#00000080] flex flex-row gap-[10px] p-[10px] items-center">
-                <Avatar />
+                <Avatar>
+                  i
+                  <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+                </Avatar>
                 <div className="flex flex-col">
                   <h5 className="text-[20px]"> Amadou </h5>
                   <p className="text-[15px]"> SG GUINÉE kenitra</p>

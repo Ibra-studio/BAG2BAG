@@ -7,11 +7,14 @@ import supabase from "../../services/supabaseClient";
 import { useNavigate } from "react-router";
 
 import { showSuccessToast } from "../../utils/toast";
+import { useModal } from "../../context/ModalContext";
 export default function Login({ navigateTo }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const { setCurrentPage } = useModal();
   //handle login form submit
   async function handlelogin(e) {
     e.preventDefault();
@@ -66,6 +69,21 @@ export default function Login({ navigateTo }) {
           </BtnPrimary>
         </div>
       </form>
+      <button
+        className="text-center"
+        onClick={() =>
+          setCurrentPage((prev) => (prev === "login" ? "signup" : "login"))
+        }
+      >
+        <p className="">
+          {" "}
+          Nouveau membre ?
+          <span className=" text-green underline cursor-pointer">
+            {" "}
+            Inscrivez-vous ici
+          </span>
+        </p>
+      </button>
     </div>
   );
 }
