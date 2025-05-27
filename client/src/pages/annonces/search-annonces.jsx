@@ -343,12 +343,12 @@ function SearchBar() {
               >
                 <KgIcon />{" "}
                 <input
-                  className="xl:w-[23px] "
+                  className="xl:w-[23px] focus:border-none focus:outline-none"
                   type="text"
                   value={Kg}
                   placeholder="kg"
                   required
-                  disabled
+                  readOnly
                   // @ts-ignore
                   onChange={(e) => setKg(Number(e.target.value))}
                 />{" "}
@@ -395,24 +395,24 @@ function Filter() {
   const [filterVerified, setFilterVerified] = useState(false);
   const [filterStudent, setFilterStudent] = useState(false);
 
-  useEffect(() => {
-    async function filterPost() {
-      try {
-        const { data, error } = await supabase
-          .from("posts")
-          .select(
-            "* , users (id, nom , prenom , photo_profil ,isVerified , profession )"
-          )
-          .ilike("paysDepart", `%${depart}%`)
-          .ilike("paysArrivee", `%${destination}%`)
-          .gte("dateDepart", dateFrom)
-          .lte("dateDepart", dateTo)
-          .gte("nombreKiloDispo", kilo)
-          .eq("isVerified", filterVerified);
-      } catch (error) {}
-    }
-    filterPost();
-  }, [filterVerified, filterPrice, filterStudent]);
+  // useEffect(() => {
+  //   async function filterPost() {
+  //     try {
+  //       const { data, error } = await supabase
+  //         .from("posts")
+  //         .select(
+  //           "* , users (id, nom , prenom , photo_profil ,isVerified , profession )"
+  //         )
+  //         .ilike("paysDepart", `%${depart}%`)
+  //         .ilike("paysArrivee", `%${destination}%`)
+  //         .gte("dateDepart", dateFrom)
+  //         .lte("dateDepart", dateTo)
+  //         .gte("nombreKiloDispo", kilo)
+  //         .eq("isVerified", filterVerified);
+  //     } catch (error) {}
+  //   }
+  //   filterPost();
+  // }, [filterVerified, filterPrice, filterStudent]);
   return (
     <div className="flex flex-col lg:w-[1000px] w-[80%] gap-5">
       <div className="flex  flex-row justify-start  items-center">

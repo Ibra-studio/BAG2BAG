@@ -4,6 +4,7 @@ import supabase from "../../services/supabaseClient";
 import Avatar from "../../components/ui/Avatar";
 import { Plane } from "lucide-react";
 import BtnPrimary from "../../components/ui/Btnprim";
+// @ts-ignore
 import BtnSecondary from "@/components/ui/Btnsec";
 // @ts-ignore
 import defaultUser from "@/assets/images/default-user.png";

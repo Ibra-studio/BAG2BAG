@@ -7,9 +7,11 @@ import PostPage from "../src/pages/annonces/search-annonces";
 // @ts-ignore
 import CreateAnnonces from "./pages/annonces/components/form/CreateAnnonces";
 import Notfound from "./pages/Notfound";
-import Dashboard from "./pages/Dashboard";
+import DashboardUser from "./pages/dashboard/DashboardUser";
 import Layout from "./components/Layout";
 import PostDetailPage from "./pages/annonces/PostDetailPage";
+import DashboardAdmin from "./pages/dashboard/DashboardAdmin";
+import ProtectedAdminRoute from "./pages/dashboard/ProtectedAdminRoute";
 
 function App() {
   return (
@@ -21,8 +23,16 @@ function App() {
           <Route path="annonces" element={<PostPage />}></Route>
           <Route path="annonces/:id" element={<PostDetailPage />} />
           <Route path="annonces/create" element={<CreateAnnonces />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard/:id" element={<DashboardUser />} />
         </Route>
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectedAdminRoute>
+              <DashboardAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>

@@ -72,7 +72,7 @@ function CreateAnnonces() {
       .select();
     if (data) {
       showSuccessToast("Post crée avec succès 🎉");
-      navigate("/app/dashboard");
+      navigate(`/app/dashboard/${userId}`);
     }
     if (error) {
       showErrorToast("erreur pour creer le post");

@@ -9,11 +9,12 @@ import { ReactComponent as DiscIcon } from "@/assets/icons/disconnect-icon.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../services/supabaseClient";
 import defaultUser from "../../assets/images/default-user.png";
+import { set } from "date-fns";
 export default function Navbar({ children, setShowModal }) {
   const [Isloggin, setIsLoggin] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
-
+  const [user, setUser] = useState();
   async function fetchUser() {
     const {
       data: { session },
@@ -23,6 +24,7 @@ export default function Navbar({ children, setShowModal }) {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+      setUser(user);
       if (user) {
         setIsLoggin(true);
         const { data, error } = await supabase
@@ -88,14 +90,13 @@ export default function Navbar({ children, setShowModal }) {
                   className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-6 w-52 p-2 shadow "
                 >
                   <li>
-                    <a className="text-[20px] text-secondary hover:underline">
-                      Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-[20px] text-secondary hover:underline">
-                      Mes annonces
-                    </a>
+                    <Link
+                      to={`/app/dashboard/${user?.id}`}
+                      className="text-[20px] text-secondary hover:underline"
+                    >
+                      {" "}
+                      Dashboard
+                    </Link>
                   </li>
                   <li>
                     <div
