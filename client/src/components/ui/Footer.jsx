@@ -14,6 +14,17 @@ function Footer() {
         <p className="text-white pt-[30px]">
           Copyright © {new Date().getFullYear()} - Tous droits reservés{" "}
         </p>
+        <p className="text-white pt-[10px] text-[14px]">
+          Réalisé par{" "}
+          <a
+            href="https://www.linkedin.com/in/mamadou-ibrahim-diakit%C3%A9/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-[#0e76a8]"
+          >
+            MID
+          </a>
+        </p>
       </aside>
       <nav>
         <div className="grid grid-flow-col gap-4">

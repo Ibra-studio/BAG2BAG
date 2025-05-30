@@ -91,11 +91,20 @@ export default function Navbar({ children, setShowModal }) {
                 >
                   <li>
                     <Link
+                      to={`/app/myprofile/${user?.id}`}
+                      className="text-[20px] text-secondary hover:underline"
+                    >
+                      {" "}
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       to={`/app/dashboard/${user?.id}`}
                       className="text-[20px] text-secondary hover:underline"
                     >
                       {" "}
-                      Dashboard
+                      Mes annonces
                     </Link>
                   </li>
                   <li>
