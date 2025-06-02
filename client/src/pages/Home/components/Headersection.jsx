@@ -77,9 +77,9 @@ export default function HeaderSection({ setShowModal, setNavigateTo }) {
         <div className="h-full w-full flex justify-center items-center  ">
           {" "}
           <Img className="hidden xl:!block motion-preset-slide-right motion-duration-1500" />
-          <Img2 className="hidden lg:!block xl:!hidden" />
-          <Img3 className="hidden sm:max-lg:!block " />
-          <Img4 className="block sm:!hidden" />
+          <Img2 className="hidden lg:!block xl:!hidden motion-preset-slide-right motion-duration-1500" />
+          <Img3 className="hidden sm:max-lg:!block motion-preset-slide-right motion-duration-1500 " />
+          <Img4 className="block sm:!hidden motion-preset-slide-right motion-duration-1500" />
         </div>
       </div>
     </section>

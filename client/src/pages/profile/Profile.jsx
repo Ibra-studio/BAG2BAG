@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+// @ts-ignore
 import Input from "@/components/form/Input";
 import BtnPrimary from "../../components/ui/Btnprim";
+// @ts-ignore
 import ProfilePhotoSelector from "@/components/form/ProfilePhotoSelector";
 import PhoneInput from "react-phone-input-2";
 
 import { GetCurrentUser } from "../../utils/GetCurrentUser";
 import { useParams } from "react-router";
 import supabase from "../../services/supabaseClient";
-import { set } from "date-fns";
-
+import { uploadProfileImage } from "@/utils/uploadProfileImage";
+import { Toaster } from "react-hot-toast";
+import { showSuccessToast } from "../../utils/toast";
 function Profile() {
   const id = useParams();
   console.log(id);
@@ -30,6 +33,7 @@ function Profile() {
           .from("users")
           .select("*")
           .eq("id", id.id);
+
         setUser(data);
         setNom(data[0].nom);
         setPrenom(data[0].prenom);
@@ -49,6 +53,19 @@ function Profile() {
   async function handleUpdate(e) {
     e.preventDefault();
 
+    let imageUrl = null;
+
+    if (image) {
+      try {
+        imageUrl = await uploadProfileImage(image, id.id);
+        console.log("URL de l'image de profil →", imageUrl);
+        showSuccessToast("Votre profil a été mise à jour avec succès !");
+        window.dispatchEvent(new Event("profile-updated")); //evenement pour provoquer le refecth de la navabar pour afficher la nouvelle photo de profil
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+    }
     const { data, error } = await supabase
       .from("users")
       .update({
@@ -56,7 +73,7 @@ function Profile() {
         prenom: prenom,
         email: email,
         numero_tel: tel,
-        photo_profil: image,
+        photo_profil: imageUrl,
       })
       .eq("id", id.id);
 
@@ -68,7 +85,8 @@ function Profile() {
   }
 
   return (
-    <div className="w-full flex  justify-center pt-10">
+    <div className="w-full flex  items-center justify-center pt-[100px]">
+      <Toaster />
       {isloading && (
         <div className="w-full flex justify-center items-center">
           <span className="loading loading-spinner loading-xl"></span>
@@ -76,7 +94,7 @@ function Profile() {
       )}
       {!isloading && user && (
         <form onSubmit={(e) => handleUpdate(e)}>
-          <div className="flex flex-col gap-5 mb-5 w-[1000px]">
+          <div className="flex flex-col gap-5 mb-30 w-[360px] sm:w-[620px] lg:w-[800px] xl:w-[1000px] bg-white p-5 rounded-[30px] ">
             <p className="text-[15px] text-center text-Secondary">
               {image
                 ? "Modifier votre photo de profil"

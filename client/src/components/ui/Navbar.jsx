@@ -52,8 +52,14 @@ export default function Navbar({ children, setShowModal }) {
     const { data: listener } = supabase.auth.onAuthStateChange(() => {
       fetchUser();
     });
+
+    // Ajout : écoute l'événement custom
+    const handleProfileUpdate = () => fetchUser();
+    window.addEventListener("profile-updated", handleProfileUpdate);
+
     return () => {
       listener?.subscription.unsubscribe();
+      window.removeEventListener("profile-updated", handleProfileUpdate);
     };
   }, []);
 
@@ -76,7 +82,7 @@ export default function Navbar({ children, setShowModal }) {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost btn-circle avatar w-[60px] h-[50px]"
+                  className="btn btn-ghost btn-circle avatar w-[60px] h-[60px]"
                 >
                   <div className="w-full rounded-full">
                     <img
@@ -87,7 +93,7 @@ export default function Navbar({ children, setShowModal }) {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-6 w-52 p-2 shadow "
+                  className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-6 w-55 p-2 shadow "
                 >
                   <li>
                     <Link
@@ -100,11 +106,20 @@ export default function Navbar({ children, setShowModal }) {
                   </li>
                   <li>
                     <Link
-                      to={`/app/dashboard/${user?.id}`}
+                      to={`/app/myannonces/${user?.id}`}
                       className="text-[20px] text-secondary hover:underline"
                     >
                       {" "}
                       Mes annonces
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={`/app/annonces/create`}
+                      className="text-[20px] text-secondary hover:underline"
+                    >
+                      {" "}
+                      Publier une annonce
                     </Link>
                   </li>
                   <li>
@@ -158,20 +173,41 @@ export default function Navbar({ children, setShowModal }) {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow "
+                className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-55 p-2 shadow "
               >
                 <li>
-                  <a className="text-[16px] text-secondary">Profile</a>
+                  <Link
+                    to={`/app/myprofile/${user?.id}`}
+                    className="text-[20px] text-secondary hover:underline"
+                  >
+                    {" "}
+                    Profile
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-[16px] text-secondary">Mes annonces</a>
+                  <Link
+                    to={`/app/myannonces/${user?.id}`}
+                    className="text-[20px] text-secondary hover:underline"
+                  >
+                    {" "}
+                    Mes annonces
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={`/app/annonces/create`}
+                    className="text-[20px] text-secondary hover:underline"
+                  >
+                    {" "}
+                    Publier une annonce
+                  </Link>
                 </li>
                 <li>
                   <div
                     className="flex justify-between gap-2 items-center"
                     onClick={handleLogout}
                   >
-                    <a className="text-[16px] text-secondary">Se deconnecter</a>
+                    <a className="text-[20px] text-secondary">Se deconnecter</a>
                     <DiscIcon className="text-black" />
                   </div>
                 </li>

@@ -44,18 +44,19 @@ export default function Timelinesection() {
     <section className="flex flex-col gap-[100px] lg:gap-[150px] pt-[100px] timeline-section">
       <div className="flex flex-col px-[15px] gap-5 items-center timeline-header">
         <BtnDiscovery text="Decouvrez BAG2BAG" />
-        <h2 className="text-center   md:text-[55px] sm:text-[45px]    text-[30px]">
+        <h2 className="text-center   md:text-[55px] sm:text-[45px]    text-[30px] intersect-once  intersect:motion-preset-slide-up motion-delay-500">
           Nous mettons en relation <br className="hidden sm:!inline" />
           voyageurs & expediteurs <br className="hidden sm:!inline" />
           pour transporter <span className="bg-green px-2">des colis</span>
         </h2>
       </div>
       <div className="flex-col justify-center items-center hidden lg:!flex  w-[100%] timeline">
-        <div className="flex flex-row  px-[30px]  2xl:px-[2.8125rem] gap-[0.625rem]  w-[100%]  timeline-container">
+        <div className="flex flex-row  px-[30px]  2xl:px-[2.8125rem] gap-[0.625rem]  w-[100%]  timeline-container ">
           <TrustCardList
             titre={data[0].titre}
             description={data[0].description}
             Icon={data[0].Icon}
+            className="intersect-once  intersect:motion-preset-slide-right motion-delay-500"
           />
           <div className="flex flex-col w-[5%] items-center progress-bar">
             <div className="flex items-center justify-center h-[50px] w-[3.125rem] bg-[#368f8b] rounded-[100%] border-[0.125rem] border-solid border-black  timeline-circle">
@@ -77,6 +78,7 @@ export default function Timelinesection() {
             titre={data[1].titre}
             description={data[1].description}
             Icon={data[1].Icon}
+            className="intersect-once  intersect:motion-preset-slide-left motion-delay-600"
           />
         </div>
         <div className="flex flex-row  px-[30px] 2xl:px-[45px] gap-[0.625rem] w-[100%] timeline-container">
@@ -84,6 +86,7 @@ export default function Timelinesection() {
             titre={data[2].titre}
             description={data[2].description}
             Icon={data[2].Icon}
+            className=" intersect-once  intersect:motion-preset-slide-right motion-delay-700"
           />
           <div className="  flex flex-col w-[5%] items-center progress-bar">
             <div className="flex items-center justify-center h-[50px] w-[50px] bg-green rounded-[100%] border-[2px] border-solid border-black timeline-circle">
@@ -100,6 +103,7 @@ export default function Timelinesection() {
             titre={data[0].titre}
             description={data[0].description}
             Icon={data[0].Icon}
+            className=" intersect-once  intersect:motion-preset-slide-right motion-delay-500"
           />
         </div>
         <div className=" flex flex-row px-[15px] lg:px-0 2xl:px-[2.8125rem] lg:w-[97%]  w-full gap-[0.625rem] timeline-container">
@@ -107,6 +111,7 @@ export default function Timelinesection() {
             titre={data[1].titre}
             description={data[1].description}
             Icon={data[1].Icon}
+            className=" intersect-once  intersect:motion-preset-slide-left motion-delay-600"
           />
         </div>
         <div className="flex flex-row px-[15px] lg:px-[30px] 2xl:px-[45px] gap-[0.625rem] lg:w-[100%]  w-full timeline-container">
@@ -114,6 +119,7 @@ export default function Timelinesection() {
             titre={data[2].titre}
             description={data[2].description}
             Icon={data[2].Icon}
+            className=" intersect-once  intersect:motion-preset-slide-right motion-delay-700"
           />
         </div>
       </div>

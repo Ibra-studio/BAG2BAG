@@ -72,7 +72,7 @@ function CreateAnnonces() {
       .select();
     if (data) {
       showSuccessToast("Post crée avec succès 🎉");
-      navigate(`/app/dashboard/${userId}`);
+      navigate(`/app/myannonces/${userId}`);
     }
     if (error) {
       showErrorToast("erreur pour creer le post");
@@ -86,7 +86,7 @@ function CreateAnnonces() {
 
       <div className="w-full flex justify-center pt-[100px]">
         <form onSubmit={handleCreateAnnonce}>
-          <div className="bg-white w-[1000px] flex flex-col p-10 gap-4">
+          <div className="bg-white w-[360px] sm:w-[620px] lg:w-[800px] xl:w-[1000px] flex flex-col p-10 gap-4">
             <h4 className="text-center mb-10">Créez une annonce</h4>
             <Input
               value={nbrKilo}

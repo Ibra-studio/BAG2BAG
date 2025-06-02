@@ -303,11 +303,11 @@ function SearchBar() {
         onSubmit={handleSubmit}
         // className="w-full flex justify-center items-center " en bas de xl
       >
-        <div className="flex flex-col Search-Bar xl:flex-row w-[80%] xl:w- ">
+        <div className=" w-[380px]  sm:w-[500px] md:w-[700px] flex flex-col Search-Bar xl:flex-row xl:w-[80%] ">
           {" "}
           {/*//en bas de xl w-[80%]*/}
-          <div className="flex flex-col bg-white px-[10px] py-[5px] xl:rounded-l-[30px] gap-4 rounded-r-[0px] xl:flex-row xl:gap-0">
-            <div className="flex flex-row xl:gap-[3px] gap-[2px] items-center px-2 justify-start border-r-1  xl:justify-center  hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
+          <div className="flex flex-col bg-white px-[10px] py-[5px] xl:rounded-l-[30px] gap-4 rounded-r-[0px] xl:flex-row xl:gap-0 ">
+            <div className="flex flex-row xl:gap-[3px] gap-[5px] items-center px-2 py-3  xl:py-0 justify-start border-r-1  xl:justify-center  hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
               <Ellipse />
               <input
                 type="text"
@@ -318,7 +318,7 @@ function SearchBar() {
                 className="focus:outline-none text-[20px] text--roboto  " //en bas de xl w-full
               />
             </div>
-            <div className="flex flex-row xl:gap-[3px]  gap-[2px] xl:ml-2  items-center  px-2 border-r-1 justify-start xl:justify-center  hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
+            <div className="flex flex-row xl:gap-[3px]  gap-[5px]  py-3 xl:py-0 xl:ml-2  items-center  px-2 border-r-1 justify-start xl:justify-center  hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
               <Ellipse />
               <input
                 type="text"
@@ -329,16 +329,16 @@ function SearchBar() {
                 className="focus:outline-none text-[20px] text-roboto " // en bas de xl w-full
               />
             </div>
-            <div className="hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] flex items-center justify-center">
+            <div className="hover:bg-[#DEDEDE] xl:rounded-l-[30px]  py-3 xl:py-0 px-2 xl:px-0 rounded-r-[30px] flex items-center justify-center">
               <DatePicker
                 className={"text-roboto "}
                 date={date}
                 setDate={setDate}
               />
             </div>
-            <div className="flex flex-col gap-[3px]  xl:ml-2  items-center !justify-between xl:justify-center xl:items-center relative ">
+            <div className="flex flex-col gap-[3px]  xl:ml-2  xl:justify-center xl:items-center relative ">
               <div
-                className="flex flex-row h-full  gap-[10px] items-center xl:justify-center px-3 !justify-between text-[20px] text-Secondary hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] "
+                className="flex flex-row h-full py-3 xl:py-0  gap-[10px] items-center xl:justify-center px-3 !justify-between text-[20px] text-Secondary hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] "
                 onClick={toggleDropdown}
               >
                 <KgIcon />{" "}
@@ -418,39 +418,38 @@ function Filter() {
       <div className="flex  flex-row justify-start  items-center">
         <p className="text-[20px]">Trier par :</p>
       </div>
-      <div className="border-t-1 flex md:flex-row  flex-col items-center  justify-between md:justify-around border-secondary pt-5 ">
-        <div className="flex flex-row gap-2 items-center text-[20px]">
-          {" "}
-          <input
-            type="checkbox"
-            className="w-[20px] h-[20px] text-green accent-green"
-            name="prix"
-            checked={filterPrice}
-            onChange={() => setFilterPrice((v) => !v)}
-          />
-          <label htmlFor="prix">Prix le plus bas</label>
-        </div>
-        <div className="flex flex-row gap-2 items-center text-[20px]">
-          {" "}
-          <input
-            type="checkbox"
-            className="w-[20px] h-[20px] text-green accent-green"
-            name="verified"
-            checked={filterVerified}
-            onChange={() => setFilterVerified((v) => !v)}
-          />
-          <label htmlFor="verified">Profil verifié </label>
-        </div>
-        <div className="flex flex-row gap-2 items-center text-[20px]">
-          {" "}
-          <input
-            type="checkbox"
-            className="w-[20px] h-[20px] text-green accent-green"
-            name="etudiant"
-            checked={filterStudent}
-            onChange={() => setFilterStudent((v) => !v)}
-          />
-          <label htmlFor="etudiant">Profil étudiant</label>
+      <div>
+        <div className="border-t-1 flex md:flex-row  flex-col items-start  justify-center  md:justify-around border-secondary pt-5 ">
+          <div className="flex flex-row gap-2 items-center text-[20px]">
+            <input
+              type="checkbox"
+              className="w-[20px] h-[20px] text-green accent-green"
+              name="prix"
+              checked={filterPrice}
+              onChange={() => setFilterPrice((v) => !v)}
+            />
+            <label htmlFor="prix">Prix le plus bas</label>
+          </div>
+          <div className="flex flex-row gap-2 items-center text-[20px]">
+            <input
+              type="checkbox"
+              className="w-[20px] h-[20px] text-green accent-green"
+              name="verified"
+              checked={filterVerified}
+              onChange={() => setFilterVerified((v) => !v)}
+            />
+            <label htmlFor="verified">Profil verifié </label>
+          </div>
+          <div className="flex flex-row gap-2 items-center text-[20px]">
+            <input
+              type="checkbox"
+              className="w-[20px] h-[20px] text-green accent-green"
+              name="etudiant"
+              checked={filterStudent}
+              onChange={() => setFilterStudent((v) => !v)}
+            />
+            <label htmlFor="etudiant">Profil étudiant</label>
+          </div>
         </div>
       </div>
     </div>
@@ -515,7 +514,7 @@ function Postlist() {
     <div className="w-full flex flex-col gap-[20px] items-center justify-center">
       {isloading && <PostSkeleton card={4} />}
       {!isloading && !hasSearched && (
-        <div className="w-full h-full flex justify-center items-center">
+        <div className="w-full h-full flex justify-center items-cente mb-5 px-3 text-center">
           <p>Faites une recherche pour voir les annonces disponibles.</p>
         </div>
       )}
@@ -542,13 +541,13 @@ function Post({ item }) {
   console.log(users);
   return (
     <Link to={`${item.id}`}>
-      <div className="xl:w-[1000px] w-[90%]  h-[196] bg-white flex flex-col justify-between  gap-[50px] rounded-[30px] p-[30px] shadow-sm  border-black border-2 hover:border-green hover:border-2 hover:shadow-0">
-        <div className="flex justify-between items-start">
+      <div className="xl:w-[1000px] w-[380px]  sm:w-[500px]  md:w-[700px]  h-[196] bg-white flex flex-col justify-between  gap-[50px] rounded-[30px] p-[30px] shadow-sm  border-black border-2 hover:border-green hover:border-2 hover:shadow-0">
+        <div className="flex justify-between items-center ">
           <div className="flex md:flex-col flex-row md:gap-0 gap-3">
             <div className="flex md:flex-row  flex-col items-center  gap-0">
               <div className="rounded-[50%] border-[1.5px] border-black w-[15px] h-[15px] "></div>
               <div className="md:!w-[300px] w-[1.5px] h-[100px]  md:h-[1.5px] bg-black  relative">
-                <Plane className=" absolute z-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <Plane className=" absolute z-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90 md:rotate-0" />
               </div>
               <div className="rounded-[100%] border-[1.5px] border-black w-[15px] h-[15px] "></div>
             </div>
@@ -565,8 +564,8 @@ function Post({ item }) {
             </h5>
           </div>
         </div>
-        <div className="border-t-1 border-black flex justify-between  items-center pt-[20px]">
-          <div className="flex flex-row  items-center justify-center gap-5">
+        <div className="border-t-1 border-black flex   flex-col-reverse  md:flex-row justify-between  items-center pt-[20px]">
+          <div className="w-full md:w-auto  flex justify-center pt-6 md:pt-0  flex-row  items-center md:justify-center gap-5">
             <Avatar isVerified={users.isVerified}>
               <img
                 src={users.photo_profil ? users.photo_profil : defaultUser}
@@ -577,7 +576,7 @@ function Post({ item }) {
               <p className="text-secondary">{users.profession}</p>
             </div>
           </div>
-          <div className="flex xl:flex-row flex-col gap-5">
+          <div className=" w-full md:w-auto  flex flex-col items-center sm:flex-row sm:justify-between xl:flex-row md:flex-col gap-5">
             <p>
               {" "}
               Date du voyage :{" "}

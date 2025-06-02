@@ -3,17 +3,17 @@ import "@/assets/global.css";
 function Painsection() {
   return (
     <div className=" w-full bg-[#368f8b] mx-auto px-[15px] py-16 md:py-40 text-center  mt-[100px]">
-      <h2 className="text-white   md:text-[55px] sm:text-[45px]    text-[30px]">
+      <h2 className="text-white   md:text-[55px] sm:text-[45px]    text-[30px] intersect-once intersect:motion-preset-slide-up motion-delay-600">
         Un etudiant veut recevoir un colis du pays{" "}
       </h2>
-      <p className="max-w-xl text-white mx-auto text-lg opacity-80 leading-relaxed mb-12  pt-5 md:mb-20">
+      <p className="max-w-xl text-white mx-auto text-lg opacity-80 leading-relaxed mb-12  pt-5 md:mb-20 intersect-once  intersect:motion-preset-slide-up motion-delay-700">
         Chaque jour, des étudiants veulent recevoir des colis.
         <br className="hidden sm:!inline" /> Mais entre les prix, les délais et
         la galère… <br className="hidden sm:!inline" />
         La plupart abandonnent. Le colis ne part jamais.
       </p>
       <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-6 ">
-        <div className="w-full md:w-50 flex flex-col gap-2 items-center justify-center">
+        <div className="w-full md:w-50 flex flex-col gap-2 items-center justify-center intersect-once  intersect:motion-preset-slide-up motion-delay-700">
           <span className="text-5xl">📦</span>
           <p className="text-white">
             il regarde les services de livraison… <br /> Trop chers. Trop longs.
@@ -39,7 +39,7 @@ function Painsection() {
             ></path>
           </g>
         </svg>
-        <div className="w-full md:w-48 flex flex-col gap-2 items-center justify-center">
+        <div className="w-full md:w-48 flex flex-col gap-2 items-center justify-center intersect-once  intersect:motion-preset-slide-up motion-delay-800">
           <span className="text-5xl">🫤</span>
           <p className="text-white">
             Il renonce. <br /> Il attend un ami, un contact, un miracle.
@@ -64,7 +64,7 @@ function Painsection() {
             ></path>
           </g>
         </svg>
-        <div className="w-full md:w-50 flex flex-col gap-2 items-center justify-center">
+        <div className="w-full md:w-50 flex flex-col gap-2 items-center justify-center intersect-once  intersect:motion-preset-slide-up motion-delay-900">
           <span className="text-5xl">✈️</span>
           <p className="text-white">
             Au même moment, un autre étudiant rentre au pays… <br /> Avec 12 kg
@@ -76,7 +76,7 @@ function Painsection() {
         {" "}
         Ces deux etudiants ne se croisent jamais
       </p>
-      <p className="text-white text-[20px] pt-[50px]">
+      <p className="text-white text-[20px] pt-[50px] intersect-once  intersect:motion-preset-slide-up motion-delay-700">
         Bag2Bag,
         <br /> c’est l’uberisation des envois de colis
         <br className="hidden sm:!inline" />{" "}

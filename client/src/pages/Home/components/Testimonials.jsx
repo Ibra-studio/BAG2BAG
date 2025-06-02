@@ -4,8 +4,8 @@ import "@/assets/global.css";
 import Avatar from "@/components/ui/Avatar";
 export default function Testimonials() {
   return (
-    <section className="flex flex-col pt-[100px] items-center justify-center relative testimonials-section mb-[100px]">
-      <h2 className="md:text-[55px] sm:text-[45px] text-[30px] text-center">
+    <section className="flex flex-col pt-[100px] items-center justify-center relative testimonials-section mb-[100px] ">
+      <h2 className="md:text-[55px] sm:text-[45px] text-[30px] text-center  intersect-once  intersect:motion-preset-slide-up motion-delay-500">
         Découvrez ce que les <br />
         <span className="bg-green px-2">étudiants etrangers</span> <br />
         au maroc disent de nous

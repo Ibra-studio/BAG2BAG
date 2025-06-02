@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import supabase from "../../services/supabaseClient";
 import Avatar from "../../components/ui/Avatar";
-import { Plane } from "lucide-react";
+import { ReactComponent as Plane } from "../../assets/icons/AvionIcon.svg";
 import BtnPrimary from "../../components/ui/Btnprim";
 // @ts-ignore
 import BtnSecondary from "@/components/ui/Btnsec";
@@ -68,24 +68,27 @@ function PostDetailPage() {
       )}
       {!isloading && post[0] && (
         <>
-          <div onClick={() => navigate(-1)}>
-            <BtnSecondary>Retournez à la recherche de post</BtnSecondary>
+          <div className="px-3 flex flex-col gap-5 mb-4">
+            <div onClick={() => navigate(-1)}>
+              <BtnSecondary>Retournez à la recherche de post</BtnSecondary>
+            </div>
+            <h2 className=" md:text-[55px] sm:text-[45px] text-[30px] ">
+              {new Date(post[0].dateDepart).toLocaleDateString("fr-FR", {
+                weekday: "long",
+              })}{" "}
+              ,{post[0].dateDepart.slice(0, 10)}
+            </h2>
           </div>
-          <h2 className=" md:text-[55px] sm:text-[45px] text-[30px]">
-            {new Date(post[0].dateDepart).toLocaleDateString("fr-FR", {
-              weekday: "long",
-            })}{" "}
-            ,{post[0].dateDepart.slice(0, 10)}
-          </h2>
-          <div className="grid lg:grid-cols-[2fr_1fr] gap-12 grid-rows-[2fr_1fr] grid-cols-1">
+          <div className="grid lg:grid-cols-[2fr_1fr]  sm:gap-12  sm:grid-rows-[2fr_1fr] gap-12 grid-rows-[1fr_1fr] grid-cols-1 px-3">
             <div className="flex flex-col gap-12 ">
               <div className=" bg-white p-5 rounded-[30px] ">
                 <div className="flex flex-row  gap-4 ">
                   <div className="flex flex-col  items-center  gap-0">
                     <div className="rounded-[50%] border-[2px] border-black w-[15px] h-[15px] "></div>
                     <div className="w-[2px]  h-[100px] bg-black  relative">
-                      <Plane className=" absolute z-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                      <Plane className=" absolute z-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90" />
                     </div>
+
                     <div className="rounded-[100%] border-[2px] border-black w-[15px] h-[15px] "></div>
                   </div>
                   <div className="flex flex-col  justify-between items-center gap-[15px] ">
