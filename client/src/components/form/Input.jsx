@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-function Input({ value, onChange, label, type, placeholder, isRequired }) {
+function Input({
+  value,
+  onChange,
+  label,
+  type,
+  placeholder,
+  isRequired,
+  className = "",
+}) {
   const [showPassword, setShowPassword] = useState(false);
 
   function toggleShowPassword() {
@@ -12,12 +20,12 @@ function Input({ value, onChange, label, type, placeholder, isRequired }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-[20px]">{label}</label>
+      {label && <label className="text-[20px]">{label}</label>}
 
       {/* Wrapper avec position relative */}
       <div className="relative">
         <input
-          className="bg-[#F7F7F7] text-[20px] p-3 pr-10 w-full focus:outline-none focus:ring-2 focus:ring-btn-primary"
+          className={`bg-[#F7F7F7] text-[20px] p-3 pr-10 w-full focus:outline-none focus:ring-2 focus:ring-btn-primary ${className}`}
           type={isPassword ? (showPassword ? "text" : "password") : type}
           placeholder={placeholder}
           value={value}

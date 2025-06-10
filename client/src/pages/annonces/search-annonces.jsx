@@ -216,6 +216,9 @@ import Alerte from "./components/Alerte";
 
 export default function PostPage() {
   const { showModal, setShowModal, currentPage, setCurrentPage } = useModal();
+  const [filterPrice, setFilterPrice] = useState(false);
+  const [filterVerified, setFilterVerified] = useState(false);
+  const [filterStudent, setFilterStudent] = useState(false);
 
   return (
     <>
@@ -255,9 +258,20 @@ export default function PostPage() {
       <section className="flex justify-center items-center flex-col pt-[100px]  w-[100%]">
         <SearchBar />
         <div className="spacer h-33"></div>
-        <Filter />
+        <Filter
+          filterPrice={filterPrice}
+          setFilterPrice={setFilterPrice}
+          filterVerified={filterVerified}
+          setFilterVerified={setFilterVerified}
+          filterStudent={filterStudent}
+          setFilterStudent={setFilterStudent}
+        />
         <div className="spacer h-10"></div>
-        <Postlist />
+        <Postlist
+          filterPrice={filterPrice}
+          filterVerified={filterVerified}
+          filterStudent={filterStudent}
+        />
       </section>
     </>
   );
@@ -390,11 +404,14 @@ function SearchBar() {
 function LastSearch() {
   return <div></div>;
 }
-function Filter() {
-  const [filterPrice, setFilterPrice] = useState(false);
-  const [filterVerified, setFilterVerified] = useState(false);
-  const [filterStudent, setFilterStudent] = useState(false);
-
+function Filter({
+  filterPrice,
+  setFilterPrice,
+  filterVerified,
+  setFilterVerified,
+  filterStudent,
+  setFilterStudent,
+}) {
   // useEffect(() => {
   //   async function filterPost() {
   //     try {
@@ -456,7 +473,7 @@ function Filter() {
   );
 }
 
-function Postlist() {
+function Postlist({ filterPrice, filterVerified, filterStudent }) {
   const [searchParams] = useSearchParams();
   const [Message, setMessage] = useState(false);
   const [isloading, setIsLoading] = useState(false);
@@ -478,16 +495,34 @@ function Postlist() {
       const dateFrom = new Date(searchParams.get("dateFrom")).toISOString();
       const dateTo = new Date(searchParams.get("dateTo")).toISOString();
 
-      getPost({ kilo, depart, destination, dateFrom, dateTo });
+      getPost({
+        kilo,
+        depart,
+        destination,
+        dateFrom,
+        dateTo,
+        filterPrice,
+        filterVerified,
+        filterStudent,
+      });
     }
     // eslint-disable-next-line
-  }, [searchParams.toString()]);
+  }, [searchParams.toString(), filterPrice, filterVerified, filterStudent]);
 
-  async function getPost({ kilo, depart, destination, dateFrom, dateTo }) {
+  async function getPost({
+    kilo,
+    depart,
+    destination,
+    dateFrom,
+    dateTo,
+    filterPrice,
+    filterVerified,
+    filterStudent,
+  }) {
     try {
       setIsLoading(true);
       setHasSearched(true);
-      const { data, error } = await supabase
+      let query = supabase
         .from("posts")
         .select(
           " * ,dateDepart, users (id, nom , prenom , photo_profil ,isVerified , profession )"
@@ -497,14 +532,52 @@ function Postlist() {
         .gte("dateDepart", dateFrom)
         .lte("dateDepart", dateTo)
         .gte("nombreKiloDispo", kilo);
-      if (data?.length === 0) {
-        console.log("Résultats :", data);
-        setMessage(true);
+
+      if (filterPrice) {
+        query = query.order("prixParKilo", { ascending: true });
       }
-      setPost(data);
-      console.log("Résultats :", data);
+      if (filterVerified) {
+        // Assuming 'users.isVerified' is the correct path for Supabase join filter
+        query = query.eq("users.isVerified", true);
+      }
+      if (filterStudent) {
+        // Assuming 'users.profession' is the correct path for Supabase join filter
+        query = query.eq("users.profession", "etudiant");
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        console.error("Erreur Supabase :", error);
+        showErrorToast(
+          "Erreur lors de la récupération des annonces: " + error.message
+        );
+        setPost([]);
+        setMessage(true); // Or handle error state appropriately
+        return;
+      }
+
+      let filteredData = data;
+      if (filterVerified) {
+        filteredData = filteredData.filter(
+          (item) => item.users && item.users.isVerified === true
+        );
+      }
+      if (filterStudent) {
+        filteredData = filteredData.filter(
+          (item) => item.users && item.users.profession === "etudiant"
+        );
+      }
+
+      if (filteredData?.length === 0) {
+        setMessage(true);
+      } else {
+        setMessage(false);
+      }
+      setPost(filteredData);
+      console.log("Résultats :", filteredData);
     } catch (error) {
-      console.error("Erreur Supabase :", error);
+      console.error("Erreur générale :", error);
     } finally {
       setIsLoading(false);
     }
@@ -513,26 +586,29 @@ function Postlist() {
   return (
     <div className="w-full flex flex-col gap-[20px] items-center justify-center">
       {isloading && <PostSkeleton card={4} />}
-      {!isloading && !hasSearched && (
+      {!isloading && !hasSearched && !searchParams.has("depart") && (
         <div className="w-full h-full flex justify-center items-cente mb-5 px-3 text-center">
           <p>Faites une recherche pour voir les annonces disponibles.</p>
         </div>
       )}
       {!isloading &&
+        hasSearched && // Ensure search has been performed
         !Message &&
+        post && // Ensure post is not null
         post.map((item, index) => <Post key={index} item={item} />)}
 
-      {Message && (
-        <div className=" w-full h-full flex  flex-col gap-5 justify-center items-center">
-          <h2 className="text-[24px] text-center">
-            {" "}
-            Il n'y a pas encore de trajet disponible entre ces pays{" "}
-          </h2>
-          <div onClick={handleCreateAlerte}>
-            <BtnPrimary> Creer une alerte</BtnPrimary>
+      {Message &&
+        hasSearched && ( // Ensure search has been performed
+          <div className=" w-full h-full flex  flex-col gap-5 justify-center items-center">
+            <h2 className="text-[24px] text-center">
+              {" "}
+              Il n'y a pas encore de trajet disponible pour ces critères.{" "}
+            </h2>
+            <div onClick={handleCreateAlerte}>
+              <BtnPrimary> Créer une alerte</BtnPrimary>
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 }
