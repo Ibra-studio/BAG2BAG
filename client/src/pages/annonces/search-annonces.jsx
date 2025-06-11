@@ -4,7 +4,7 @@ import { useModal } from "../../context/ModalContext";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import defaultUser from "@/assets/images/default-user.png";
 import Navbar from "../../components/ui/Navbar";
-import { addDays } from "date-fns";
+import { addDays, set } from "date-fns";
 import "../../assets/global.css";
 // @ts-ignore
 import { ReactComponent as Ellipse } from "../../assets/icons/ellipse.svg";
@@ -285,6 +285,7 @@ function SearchBar() {
   const [destination, setDestination] = useState(
     () => searchParams.get("destination") || ""
   );
+  const [suggestionsTrajet, setSuggestionsTrajet] = useState([]);
   const [error, setError] = useState("");
   const [date, setDate] = useState({
     from: new Date(), // Date du moment
@@ -294,6 +295,34 @@ function SearchBar() {
   function toggleDropdown() {
     setIsOpen((prev) => !prev);
   }
+  function handlesuggestion(e) {
+    setDepart(e.target.innerText);
+  }
+  useEffect(() => {
+    async function fetchCountriesCities() {
+      try {
+        if (depart) {
+          let { data: countries, error } = await supabase
+            .from("countries")
+            .select("id, name, flag, cities (id, name)")
+            .ilike("name", `%${depart}%`);
+
+          const formattedData = countries?.map((country) =>
+            country.cities.map((city) => ({
+              label: `${country.name} - ${city.name}`,
+            }))
+          );
+          console.log(formattedData);
+          if (formattedData && formattedData.length > 0) {
+            setSuggestionsTrajet(formattedData);
+          }
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des pays :", error);
+      }
+    }
+    fetchCountriesCities();
+  }, [depart]);
   function handleSubmit(e) {
     e.preventDefault();
     if (Kg == 0) {
@@ -306,7 +335,6 @@ function SearchBar() {
     params.set("destination", destination);
     params.set("dateFrom", date.from);
     params.set("dateTo", date.to);
-
     console.log(date);
     navigate(`/app/annonces?${params.toString()}`);
     setError("");
@@ -332,6 +360,7 @@ function SearchBar() {
                 className="focus:outline-none text-[20px] text--roboto  " //en bas de xl w-full
               />
             </div>
+
             <div className="flex flex-row xl:gap-[3px]  gap-[5px]  py-3 xl:py-0 xl:ml-2  items-center  px-2 border-r-1 justify-start xl:justify-center  hover:bg-[#DEDEDE] xl:rounded-l-[30px] rounded-r-[30px] ">
               <Ellipse />
               <input
@@ -396,6 +425,21 @@ function SearchBar() {
             <Search /> Rechercher
           </button>
         </div>
+        {suggestionsTrajet && (
+          <div className="bg-white w-[300px]">
+            <ul>
+              {suggestionsTrajet[0]?.map((trajet, index) => (
+                <li
+                  key={index}
+                  className="list-none"
+                  onClick={handlesuggestion}
+                >
+                  {trajet.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </form>
     </>
   );
@@ -614,7 +658,6 @@ function Postlist({ filterPrice, filterVerified, filterStudent }) {
 }
 function Post({ item }) {
   const { users } = item;
-  console.log(users);
   return (
     <Link to={`${item.id}`}>
       <div className="xl:w-[1000px] w-[380px]  sm:w-[500px]  md:w-[700px]  h-[196] bg-white flex flex-col justify-between  gap-[50px] rounded-[30px] p-[30px] shadow-sm  border-black border-2 hover:border-green hover:border-2 hover:shadow-0">
