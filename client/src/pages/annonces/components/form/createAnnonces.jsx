@@ -1,7 +1,6 @@
 // @ts-ignore
 import React, { useState } from "react";
 import { Toaster } from "react-hot-toast";
-import Navbar from "../../../../components/ui/Navbar";
 // @ts-ignore
 import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore

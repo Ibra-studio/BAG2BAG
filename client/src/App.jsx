@@ -35,6 +35,9 @@ const PostPage = React.lazy(() => import("./pages/annonces/search-annonces"));
 const AdminLayout = React.lazy(() =>
   import("./pages/AdminDashboard/components/layout/AdminLayout")
 );
+const EditPosts = React.lazy(() =>
+  import("./pages/annonces/components/form/EditPosts")
+);
 function App() {
   return (
     //{" "}
@@ -50,6 +53,7 @@ function App() {
                 <Route path="annonces/create" element={<CreateAnnonces />} />
                 <Route path="myprofile/:id" element={<Profile />} />
                 <Route path="myannonces/:id" element={<Myannonces />} />
+                <Route path="myannonces/edit/:id" element={<EditPosts />} />
               </Route>
               <Route path="/admin-dashboard" element={<AdminLayout />}>
                 <Route index element={<Dashboard />} />

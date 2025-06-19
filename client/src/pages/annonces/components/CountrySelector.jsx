@@ -6,7 +6,6 @@ function CountrySelector({ setFullLabel, label }) {
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-
   useEffect(() => {
     const fetchCountries = async () => {
       const { data, error } = await supabase
@@ -35,7 +34,7 @@ function CountrySelector({ setFullLabel, label }) {
       const { data, error } = await supabase
         .from("cities")
         .select("name")
-        .eq("country_id", `${selectedCountry.value}`);
+        .eq("country_id", `${selectedCountry?.value}`);
       if (error) {
         console.error("Erreur chargement ville :", error.message);
         return;
@@ -43,7 +42,7 @@ function CountrySelector({ setFullLabel, label }) {
       console.log(data);
       const formattedData = data.map((city) => ({
         value: `${city.name}`,
-        label: `${selectedCountry.label} - ${city.name}`,
+        label: `${selectedCountry?.label} - ${city.name}`,
       }));
       console.log(formattedData);
       setCities(formattedData);
@@ -65,6 +64,7 @@ function CountrySelector({ setFullLabel, label }) {
         <Select
           options={countries}
           onChange={(value) => {
+            console.log(value);
             setSelectedCountry(value);
             setSelectedCity(null);
           }}

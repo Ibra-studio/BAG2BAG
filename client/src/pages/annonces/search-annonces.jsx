@@ -30,6 +30,7 @@ import supabase from "../../services/supabaseClient";
 import { showErrorToast } from "../../utils/toast";
 import PostSkeleton from "./components/PostSkeleton";
 import Alerte from "./components/Alerte";
+import { useRef } from "react";
 
 // const data = [
 //   {
@@ -286,26 +287,47 @@ function SearchBar() {
     () => searchParams.get("destination") || ""
   );
   const [suggestionsTrajet, setSuggestionsTrajet] = useState([]);
+  const [isOpenSuggestionsDepart, setIsOpenSuggestionsDepart] = useState(false);
+  const [isOpenSuggestionsDestination, setIsOpenSuggestionsDestination] =
+    useState(false);
   const [error, setError] = useState("");
   const [date, setDate] = useState({
     from: new Date(), // Date du moment
     to: addDays(new Date(), 20), // 20 jours après la date du moment
   });
+  const prevValues = useRef({ depart: "", destination: "" });
   const navigate = useNavigate();
   function toggleDropdown() {
     setIsOpen((prev) => !prev);
   }
-  function handlesuggestion(e) {
+  function handlesuggestionDepart(e) {
     setDepart(e.target.innerText);
+    setIsOpenSuggestionsDepart(false);
+  }
+  function handlesuggestionDestination(e) {
+    setDestination(e.target.innerText);
+    setIsOpenSuggestionsDestination(false);
   }
   useEffect(() => {
+    const prevDepart = prevValues.current.depart;
+    const prevDestination = prevValues.current.destination;
+
+    // Mettre à jour les valeurs précédentes
+    prevValues.current = { depart, destination };
+    // Vérifier si les valeurs ont changé
+    let searhValue;
+    if (depart !== prevDepart) {
+      searhValue = depart;
+    } else if (destination !== prevDestination) {
+      searhValue = destination;
+    }
     async function fetchCountriesCities() {
       try {
         if (depart) {
           let { data: countries, error } = await supabase
             .from("countries")
             .select("id, name, flag, cities (id, name)")
-            .ilike("name", `%${depart}%`);
+            .ilike("name", `%${searhValue}%`);
 
           const formattedData = countries?.map((country) =>
             country.cities.map((city) => ({
@@ -322,7 +344,7 @@ function SearchBar() {
       }
     }
     fetchCountriesCities();
-  }, [depart]);
+  }, [depart, destination]);
   function handleSubmit(e) {
     e.preventDefault();
     if (Kg == 0) {
@@ -345,7 +367,7 @@ function SearchBar() {
         onSubmit={handleSubmit}
         // className="w-full flex justify-center items-center " en bas de xl
       >
-        <div className=" w-[380px]  sm:w-[500px] md:w-[700px] flex flex-col Search-Bar xl:flex-row xl:w-[80%] ">
+        <div className=" w-[380px]  sm:w-[500px] md:w-[700px] flex flex-col Search-Bar xl:flex-row xl:w-[80%] relative ">
           {" "}
           {/*//en bas de xl w-[80%]*/}
           <div className="flex flex-col bg-white px-[10px] py-[5px] xl:rounded-l-[30px] gap-4 rounded-r-[0px] xl:flex-row xl:gap-0 ">
@@ -356,7 +378,10 @@ function SearchBar() {
                 placeholder="Depart"
                 value={depart}
                 required
-                onChange={({ target }) => setDepart(target.value)}
+                onChange={({ target }) => {
+                  setDepart(target.value);
+                  setIsOpenSuggestionsDepart(true);
+                }}
                 className="focus:outline-none text-[20px] text--roboto  " //en bas de xl w-full
               />
             </div>
@@ -368,7 +393,10 @@ function SearchBar() {
                 placeholder="Destination"
                 value={destination}
                 required
-                onChange={({ target }) => setDestination(target.value)}
+                onChange={({ target }) => {
+                  setDestination(target.value);
+                  setIsOpenSuggestionsDestination(true);
+                }}
                 className="focus:outline-none text-[20px] text-roboto " // en bas de xl w-full
               />
             </div>
@@ -425,21 +453,40 @@ function SearchBar() {
             <Search /> Rechercher
           </button>
         </div>
-        {suggestionsTrajet && (
-          <div className="bg-white w-[300px]">
-            <ul>
-              {suggestionsTrajet[0]?.map((trajet, index) => (
-                <li
-                  key={index}
-                  className="list-none"
-                  onClick={handlesuggestion}
-                >
-                  {trajet.label}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {suggestionsTrajet &&
+          isOpenSuggestionsDepart &&
+          !isOpenSuggestionsDestination && (
+            <div className="bg-white w-[300px] absolute">
+              <ul className="flex flex-col gap-3 p-4 mt-2">
+                {suggestionsTrajet[0]?.map((trajet, index) => (
+                  <li
+                    key={index}
+                    className="list-none hover:bg-btn-primary"
+                    onClick={handlesuggestionDepart}
+                  >
+                    {trajet.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        {suggestionsTrajet &&
+          !isOpenSuggestionsDepart &&
+          isOpenSuggestionsDestination && (
+            <div className="bg-white w-[300px] absolute right-300">
+              <ul className="flex flex-col gap-3 p-4 mt-2">
+                {suggestionsTrajet[0]?.map((trajet, index) => (
+                  <li
+                    key={index}
+                    className="list-none hover:bg-btn-primary"
+                    onClick={handlesuggestionDestination}
+                  >
+                    {trajet.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
       </form>
     </>
   );
