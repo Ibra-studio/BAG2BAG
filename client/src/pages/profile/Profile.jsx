@@ -55,16 +55,19 @@ function Profile() {
 
     let imageUrl = null;
 
-    if (image) {
+    if (image instanceof File) {
       try {
         imageUrl = await uploadProfileImage(image, id.id);
         console.log("URL de l'image de profil →", imageUrl);
-        showSuccessToast("Votre profil a été mise à jour avec succès !");
+
         window.dispatchEvent(new Event("profile-updated")); //evenement pour provoquer le refecth de la navabar pour afficher la nouvelle photo de profil
       } catch (error) {
         console.error(error);
         return;
       }
+    } else if (typeof image === "string" && image) {
+      // Si image est déjà une URL (ancienne image), on la garde
+      imageUrl = image;
     }
     const { data, error } = await supabase
       .from("users")
@@ -81,6 +84,7 @@ function Profile() {
       console.log("Erreur update :", error);
     } else {
       console.log("Update OK :", data);
+      showSuccessToast("Votre profil a été mise à jour avec succès !");
     }
   }
 
