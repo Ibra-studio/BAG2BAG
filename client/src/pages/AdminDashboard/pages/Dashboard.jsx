@@ -1,9 +1,57 @@
-import { Users, FileText, Calendar, Edit } from "lucide-react";
+import { Users, FileText, Calendar, Edit } from "lucide-react"; // Assuming FileText, Calendar, Edit might be used later
 import StatsCard from "../components/ui/StatCard";
 import RecentUsers from "../components/dashboard/RecentUsers";
 import RecentPosts from "../components/dashboard/RecentPosts";
-import React from "react";
+import UsersByMonthChart from "../components/dashboard/UsersByMonthChart";
+import UserNationalityChart from "../components/dashboard/UserNationalityChart"; // Import the new chart
+import React, { useEffect, useState } from "react";
+import { getUsers } from "../../../services/apiUsers";
+import getPosts from "../../../services/apiPosts"; // Default export
+
 export default function Dashboard() {
+  const [usersData, setUsersData] = useState([]);
+  const [postsData, setPostsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      setError(null);
+      try {
+        const [users, posts] = await Promise.all([getUsers(), getPosts()]);
+        setUsersData(users || []);
+        setPostsData(posts || []);
+      } catch (err) {
+        console.error("Failed to fetch dashboard data:", err);
+        setError(
+          err.message || "An error occurred while fetching dashboard data"
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const totalUsers = usersData.length;
+  const totalPosts = postsData.length;
+  // Assuming user object has a 'status' field
+  const usersPendingVerification = usersData.filter(
+    (user) => user.status === "En Attente"
+  ).length;
+  // Placeholder for active users per month, using total users for now
+  const activeUsersPerMonth = totalUsers;
+
+
+  if (loading) {
+    return <div className="p-6">Loading dashboard data...</div>;
+  }
+
+  if (error) {
+    return <div className="p-6 text-red-500">Error: {error}</div>;
+  }
+
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
@@ -14,7 +62,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
         <StatsCard
           title="Total Utilisateurs"
-          value="12,547"
+          value={totalUsers.toLocaleString()}
           Icon={Users}
           iconColor="text-blue-600"
           bgColor="bg-blue-100"
@@ -47,29 +95,13 @@ export default function Dashboard() {
       </div>
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">
-            Utilisateurs par Mois
-          </h4>
-          <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-            <p className="text-gray-500">Graphique des utilisateurs par mois</p>
-          </div>
-        </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">
-            Nationalité des Utilisateurs
-          </h4>
-          <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-            <p className="text-gray-500">
-              Graphique de répartition par nationalité
-            </p>
-          </div>
-        </div>
+        <UsersByMonthChart usersData={usersData} />
+        <UserNationalityChart usersData={usersData} />
       </div>
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <RecentUsers />
-        <RecentPosts />
+        <RecentUsers users={usersData} />
+        <RecentPosts posts={postsData} />
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const getStatusColor = (status) => {
   }
 };
 
-export default function UserRow({ user }) {
+export default function UserRow({ user, handleDeleteUser }) {
   return (
     <tr key={user.id} className="border-b border-gray-100 hover:bg-gray-50">
       <td className="py-4 px-4">check</td>
@@ -41,7 +41,11 @@ export default function UserRow({ user }) {
           <button className="h-8 w-8 p-0 size-sm">
             <Edit className="h-4 w-4" />
           </button>
-          <button className="h-8 w-8 p-0 text-red-600 hover:text-red-700 size-sm">
+          <button
+            onClick={() => handleDeleteUser(user.id)}
+            className="h-8 w-8 p-0 text-red-600 hover:text-red-700 size-sm"
+            aria-label="Supprimer l'utilisateur" // Accessibility improvement
+          >
             <Trash2 className="h-4 w-4" />
           </button>
         </div>

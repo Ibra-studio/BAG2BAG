@@ -2,7 +2,7 @@ import { Download } from "lucide-react";
 import UserRow from "./UsersRow";
 import BtnPrimary from "../../../../components/ui/Btnprim";
 import React, { useState } from "react";
-export default function UsersTable({ users }) {
+export default function UsersTable({ users, handleDeleteUser }) { // Add handleDeleteUser to props
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
   const totalPages = Math.ceil(users.length / rowsPerPage);
@@ -52,7 +52,7 @@ export default function UsersTable({ users }) {
             </thead>
             <tbody>
               {paginatedUsers.map((user) => (
-                <UserRow key={user.id} user={user} />
+                <UserRow key={user.id} user={user} handleDeleteUser={handleDeleteUser} /> // Pass handleDeleteUser to UserRow
               ))}
             </tbody>
           </table>

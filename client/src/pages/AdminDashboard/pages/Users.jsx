@@ -1,12 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { getUsers, deleteUser } from "../../../services/apiUsers";
+import { exportTableToPDF } from "../../../utils/pdfExporter"; // Import PDF exporter
 import UsersStats from "../components/Users/UsersStats";
 import UsersFilters from "../components/Users/UsersFilters";
 import UsersTable from "../components/Users/UsersTable";
 import UsersVerificationTable from "../components/Users/UsersVerificationTable";
 
-// Mock data remains here for now, to be passed as props
-const mockUsersData = [
-  {
+// Mock data is removed, will be fetched from API
+// const mockUsersData = [
+//   {
     id: 1001,
     name: "Marie Dubois",
     email: "marie.dubois@email.com",
@@ -274,41 +276,99 @@ const mockUsersData = [
     phone: "+33 6 67 89 01 25",
     status: "Non Vérifié",
     inscription: "17 Oct 2024",
-    avatar: "/placeholder.svg",
-  },
-];
+//     avatar: "/placeholder.svg",
+//   },
+// ];
 
-// Example data for verification requests, this might also come from a different source/state
-const mockVerificationRequestsData = [
-  {
-    id: 1004, // User Marc Dupont is "En Attente"
-    name: "Marc Dupont",
-    email: "marc.dupont@email.com",
-    date: "12 Nov 2024",
-    avatar: "/placeholder.svg",
-    avatarFallback: "MD",
-  },
-];
+// mockVerificationRequestsData is removed, will be derived from usersData
+// const mockVerificationRequestsData = [
+//   {
+//     id: 1004, // User Marc Dupont is "En Attente"
+//     name: "Marc Dupont",
+//     email: "marc.dupont@email.com",
+//     date: "12 Nov 2024",
+//     avatar: "/placeholder.svg",
+//     avatarFallback: "MD",
+//   },
+// ];
 
 export default function UsersPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  // TODO: Implement actual filtering logic for status and sorting
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [sortBy, setSortBy] = useState("newest");
+  const [statusFilter, setStatusFilter] = useState("all"); // TODO: Implement actual filtering
+  const [sortBy, setSortBy] = useState("newest"); // TODO: Implement actual sorting
+  const [usersData, setUsersData] = useState([]); // State for fetched users
+  const [isLoading, setIsLoading] = useState(false); // For loading states
+  const [error, setError] = useState(null); // For error messages
+
+  const fetchUsers = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await getUsers();
+      setUsersData(data);
+      // console.log("Fetched users:", data); // Temporary log - REMOVED
+    } catch (err) {
+      console.error("Failed to load users:", err);
+      setError(err.message || "Failed to load users");
+      // TODO: Add user-facing error notification (e.g., toast)
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  const handleDeleteUser = async (userId) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+      setIsLoading(true);
+      try {
+        await deleteUser(userId);
+        alert("Utilisateur supprimé avec succès !"); // Replace with toast if available
+        fetchUsers(); // Re-fetch users to update the list
+      } catch (err) {
+        console.error("Failed to delete user:", err);
+        alert("Erreur lors de la suppression de l'utilisateur."); // Replace with toast
+        setError(err.message || "Failed to delete user");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
 
   // Filtering logic (simplified for now, can be expanded)
   const filteredUsers = useMemo(() => {
-    let users = mockUsersData.filter(
+    // TODO: Replace mockUsersData with usersData once API is connected
+    let users = usersData.filter(
       (user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+        (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (user.email && user.email.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
     // TODO: Add status filtering based on statusFilter
     // TODO: Add sorting based on sortBy (e.g., inscription date)
 
     return users;
-  }, [searchTerm]); //TODO: Add statusFilter and sortBy to dependencies when implemented
+  }, [searchTerm, usersData]); //TODO: Add statusFilter and sortBy to dependencies
+
+  const verificationRequestsData = useMemo(() => {
+    return usersData.filter(user => user.status === "En Attente");
+  }, [usersData]);
+
+  const handleExportPDF = () => {
+    const columns = [
+      { header: 'Nom', dataKey: 'name' },
+      { header: 'Email', dataKey: 'email' },
+      { header: 'Téléphone', dataKey: 'phone' },
+      { header: 'Statut', dataKey: 'status' },
+      { header: 'Inscription', dataKey: 'inscription' },
+      // Add id if it's useful, but typically not for a visual export like this unless specified
+      // { header: 'ID', dataKey: 'id' },
+    ];
+    // Use filteredUsers to export what's currently visible
+    exportTableToPDF(columns, filteredUsers, "Liste des Utilisateurs", "utilisateurs.pdf");
+  };
 
   return (
     <div className="p-6 space-y-6 flex flex-col gap-4">
@@ -322,7 +382,7 @@ export default function UsersPage() {
         </p>
       </div>
 
-      <UsersStats />
+      <UsersStats usersData={usersData} />
 
       <UsersFilters
         searchTerm={searchTerm}
@@ -332,11 +392,18 @@ export default function UsersPage() {
         sortBy={sortBy}
         setSortBy={setSortBy}
       />
+      <button
+        onClick={handleExportPDF}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 self-start"
+      >
+        Exporter en PDF
+      </button>
 
-      <UsersTable users={filteredUsers} />
+      <UsersTable users={filteredUsers} handleDeleteUser={handleDeleteUser} />
 
       <UsersVerificationTable
-        verificationUsers={mockVerificationRequestsData}
+        verificationUsers={verificationRequestsData}
+        // If UsersVerificationTable also needs delete, pass handleDeleteUser here too
       />
     </div>
   );

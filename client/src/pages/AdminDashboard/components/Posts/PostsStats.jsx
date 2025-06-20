@@ -1,6 +1,6 @@
 import StatCard from "../ui/StatCard";
 
-export default function PostsStats({ totalPosts, filteredPosts }) {
+export default function PostsStats({ totalPosts, filteredPostsCount }) {
   const stats = [
     {
       title: "Total Annonces",
@@ -11,7 +11,7 @@ export default function PostsStats({ totalPosts, filteredPosts }) {
     },
     {
       title: "Annonces Affichées",
-      value: filteredPosts.toString(),
+      value: filteredPostsCount.toString(),
       bgColor: "bg-green-100",
       iconColor: "text-green-600",
       borderColor: "border-green-100",
