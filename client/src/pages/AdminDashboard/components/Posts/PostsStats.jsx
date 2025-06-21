@@ -4,28 +4,28 @@ export default function PostsStats({ totalPosts, filteredPosts }) {
   const stats = [
     {
       title: "Total Annonces",
-      value: totalPosts.toString(),
+      value: totalPosts,
       bgColor: "bg-blue-100",
       iconColor: "text-blue-600",
       borderColor: "border-blue-100",
     },
     {
       title: "Annonces Affichées",
-      value: filteredPosts.toString(),
+      value: filteredPosts,
       bgColor: "bg-green-100",
       iconColor: "text-green-600",
       borderColor: "border-green-100",
     },
     {
       title: "Annonces Signalées",
-      value: "2",
+      value: 0,
       bgColor: "bg-red-100",
       iconColor: "text-red-600",
       borderColor: "border-red-100",
     },
     {
       title: "Annonces Aujourd'hui",
-      value: "0",
+      value: 0,
       bgColor: "bg-purple-100",
       iconColor: "text-purple-600",
       borderColor: "border-purple-100",

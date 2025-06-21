@@ -1,32 +1,32 @@
 import StatCard from "../ui/StatCard";
 
-export default function UsersStats() {
+export default function UsersStats({ users }) {
   // { totalPosts, filteredPosts }
   const stats = [
     {
       title: "Total Utilisateurs",
-      value: "12,547",
+      value: users.length,
       iconColor: "text-blue-600",
       iconBg: "bg-blue-100",
       borderColor: "border-blue-100",
     },
     {
       title: "Utilisateurs Vérifiés",
-      value: "9,234",
+      value: users.length,
       iconColor: "text-green-600",
       iconBg: "bg-green-100",
       borderColor: "border-green-100",
     },
     {
       title: "Non Vérifiés",
-      value: "3,157",
+      value: 0,
       iconColor: "text-red-600",
       iconBg: "bg-red-100",
       borderColor: "border-red-100",
     },
     {
       title: "Demandes en Attente",
-      value: "156",
+      value: 0,
       iconColor: "text-orange-600",
       iconBg: "bg-orange-100",
       borderColor: "border-orange-100",

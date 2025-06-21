@@ -9,7 +9,6 @@ import { ReactComponent as DiscIcon } from "@/assets/icons/disconnect-icon.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../services/supabaseClient";
 import defaultUser from "../../assets/images/default-user.png";
-import { set } from "date-fns";
 export default function Navbar({ children, setShowModal }) {
   const [Isloggin, setIsLoggin] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
