@@ -37,9 +37,9 @@ export default function HeaderSection({ setShowModal, setNavigateTo }) {
     } = await supabase.auth.getSession();
 
     if (session) {
-      navigate("/app/annonces/create");
+      navigate("/annonces/create");
     } else {
-      setNavigateTo("/app/annonces/create");
+      setNavigateTo("/annonces/create");
       setShowModal(true);
     }
   }
@@ -67,7 +67,7 @@ export default function HeaderSection({ setShowModal, setNavigateTo }) {
           </div>
           <BtnSecondary>
             <IconSearh />
-            <Link to="/app/annonces"> Voir les annonces</Link>
+            <Link to="/annonces"> Voir les annonces</Link>
           </BtnSecondary>
         </div>
       </div>

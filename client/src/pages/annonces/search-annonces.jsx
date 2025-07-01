@@ -358,7 +358,7 @@ function SearchBar() {
     params.set("dateFrom", date.from);
     params.set("dateTo", date.to);
     console.log(date);
-    navigate(`/app/annonces?${params.toString()}`);
+    navigate(`/annonces?${params.toString()}`);
     setError("");
   }
   return (

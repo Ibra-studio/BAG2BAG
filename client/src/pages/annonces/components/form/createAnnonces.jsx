@@ -71,7 +71,7 @@ function CreateAnnonces() {
       .select();
     if (data) {
       showSuccessToast("Post crée avec succès 🎉");
-      navigate(`/app/myannonces/${userId}`);
+      navigate(`/myannonces/${userId}`);
     }
     if (error) {
       showErrorToast("erreur pour creer le post");

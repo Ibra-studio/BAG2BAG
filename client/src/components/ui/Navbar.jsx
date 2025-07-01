@@ -70,7 +70,7 @@ export default function Navbar({ children, setShowModal }) {
   return (
     <div>
       <div className="p-5  2xl:mx-[150px] xl:mx-[50px]  md:mx-[40px]  sm:mx-[20px] hidden sm:!flex   gap-[20px] justify-between items-center border-b-solid border-b-[0.3px] border-b-[#000000]">
-        <Link to="/app">
+        <Link to="/">
           <Logo />
         </Link>
 
@@ -96,7 +96,7 @@ export default function Navbar({ children, setShowModal }) {
                 >
                   <li>
                     <Link
-                      to={`/app/myprofile/${user?.id}`}
+                      to={`/myprofile/${user?.id}`}
                       className="text-[20px] text-secondary hover:underline"
                     >
                       {" "}
@@ -105,7 +105,7 @@ export default function Navbar({ children, setShowModal }) {
                   </li>
                   <li>
                     <Link
-                      to={`/app/myannonces/${user?.id}`}
+                      to={`/myannonces/${user?.id}`}
                       className="text-[20px] text-secondary hover:underline"
                     >
                       {" "}
@@ -114,7 +114,7 @@ export default function Navbar({ children, setShowModal }) {
                   </li>
                   <li>
                     <Link
-                      to={`/app/annonces/create`}
+                      to={`/annonces/create`}
                       className="text-[20px] text-secondary hover:underline"
                     >
                       {" "}
@@ -147,7 +147,7 @@ export default function Navbar({ children, setShowModal }) {
         } gap-3 sm:hidden shadow-sm pt-7 px-[15px]`}
       >
         <div className="flex-1">
-          <Link to="/app">
+          <Link to="/">
             <Logo />
           </Link>
         </div>
@@ -176,7 +176,7 @@ export default function Navbar({ children, setShowModal }) {
               >
                 <li>
                   <Link
-                    to={`/app/myprofile/${user?.id}`}
+                    to={`/myprofile/${user?.id}`}
                     className="text-[20px] text-secondary hover:underline"
                   >
                     {" "}
@@ -185,7 +185,7 @@ export default function Navbar({ children, setShowModal }) {
                 </li>
                 <li>
                   <Link
-                    to={`/app/myannonces/${user?.id}`}
+                    to={`/myannonces/${user?.id}`}
                     className="text-[20px] text-secondary hover:underline"
                   >
                     {" "}
@@ -194,7 +194,7 @@ export default function Navbar({ children, setShowModal }) {
                 </li>
                 <li>
                   <Link
-                    to={`/app/annonces/create`}
+                    to={`/annonces/create`}
                     className="text-[20px] text-secondary hover:underline"
                   >
                     {" "}

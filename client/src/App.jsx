@@ -46,7 +46,7 @@ function App() {
         <BrowserRouter>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
-              <Route path="/app" element={<Layout />}>
+              <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="annonces" element={<PostPage />}></Route>
                 <Route path="annonces/:id" element={<PostDetailPage />} />
