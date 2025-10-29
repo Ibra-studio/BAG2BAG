@@ -1,4 +1,4 @@
-import Input from "@/components/form/input";
+import Input from "@/components/form/Input";
 import { Search } from "lucide-react";
 import React from "react";
 export default function UsersFilters({
