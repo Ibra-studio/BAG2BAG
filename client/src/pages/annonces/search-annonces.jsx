@@ -22,9 +22,9 @@ import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore
 import Modal from "@/components/Modal";
 // @ts-ignore
-import Login from "@/pages/Auth/login";
+import Login from "@/pages/Auth/Login";
 // @ts-ignore
-import SignUp from "@/pages/Auth/signup";
+import SignUp from "@/pages/Auth/SignUp";
 
 import supabase from "../../services/supabaseClient";
 import { showErrorToast } from "../../utils/toast";
