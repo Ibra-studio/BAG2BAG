@@ -19,7 +19,7 @@ const Dashboard = React.lazy(() =>
   import("./pages/AdminDashboard/pages/Dashboard")
 );
 const CreateAnnonces = React.lazy(() =>
-  import("./pages/annonces/components/form/CreateAnnonces")
+  import("./pages/annonces/components/form/createAnnonces")
 );
 const PostDetailPage = React.lazy(() =>
   import("./pages/annonces/PostDetailPage")
