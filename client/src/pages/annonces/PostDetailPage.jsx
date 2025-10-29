@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import supabase from "../../services/supabaseClient";
 import Avatar from "../../components/ui/Avatar";
 import { ReactComponent as Plane } from "../../assets/icons/AvionIcon.svg";

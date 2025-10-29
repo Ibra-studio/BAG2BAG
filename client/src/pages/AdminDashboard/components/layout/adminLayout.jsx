@@ -6,7 +6,7 @@ import supabase from "../../../../services/supabaseClient";
 // registerLicense(import.meta.env.VITE_SYNCFUSION_KEY);
 // console.log(import.meta.env.VITE_SYNCFUSION_KEY);
 import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import NavItems from "./NavItems";
 import { Calendar, Users, FileText } from "lucide-react";
 const menuItems = [

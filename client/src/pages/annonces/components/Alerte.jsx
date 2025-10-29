@@ -4,7 +4,7 @@ import Input from "@/components/form/Input";
 import supabase from "../../../services/supabaseClient";
 import { GetCurrentUser } from "@/utils/GetCurrentUser";
 import { ReactComponent as Plane } from "@/assets/icons/AvionIcon.svg";
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 function Alerte() {
   const [email, setEmail] = useState("");
   const [user, setUser] = useState(null);

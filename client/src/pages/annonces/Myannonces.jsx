@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import supabase from "../../services/supabaseClient";
 import MyannoncesRow from "./components/MyannoncesRow"; // Assuming you have a row component for displaying each annonce
 function Myannonces() {

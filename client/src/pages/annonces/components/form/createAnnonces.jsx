@@ -9,7 +9,7 @@ import CountrySelector from "../CountrySelector";
 // @ts-ignore
 import supabase from "@/services/supabaseClient";
 import { showErrorToast, showSuccessToast } from "../../../../utils/toast";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function CreateAnnonces() {
   // @ts-ignore

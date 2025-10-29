@@ -4,7 +4,7 @@ import "@/assets/global.css";
 import Input from "@/components/form/Input";
 import BtnPrimary from "../../components/ui/Btnprim";
 import supabase from "../../services/supabaseClient";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import { showSuccessToast } from "../../utils/toast";
 import { useModal } from "../../context/ModalContext";

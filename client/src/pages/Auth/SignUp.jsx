@@ -11,7 +11,7 @@ import "react-phone-input-2/lib/style.css";
 import supabase from "@/services/supabaseClient";
 // @ts-ignore
 import { uploadProfileImage } from "@/utils/uploadProfileImage";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import { showSuccessToast } from "../../utils/toast";
 import { useModal } from "../../context/ModalContext";

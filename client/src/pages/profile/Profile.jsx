@@ -7,7 +7,7 @@ import ProfilePhotoSelector from "@/components/form/ProfilePhotoSelector";
 import PhoneInput from "react-phone-input-2";
 
 import { GetCurrentUser } from "../../utils/GetCurrentUser";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import supabase from "../../services/supabaseClient";
 import { uploadProfileImage } from "@/utils/uploadProfileImage";
 import { Toaster } from "react-hot-toast";

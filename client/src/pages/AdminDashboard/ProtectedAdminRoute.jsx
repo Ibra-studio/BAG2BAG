@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { GetCurrentUser } from "@/utils/GetCurrentUser";
 import getUserRole from "@/utils/getUserRole";
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { Search, Edit, Trash2, MapPin, Calendar } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import supabase from "@/services/supabaseClient";
 import { showErrorToast, showSuccessToast } from "@/utils/toast";
-import { useNavigate, useNavigation, useParams } from "react-router";
+import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 function MyannoncesRow({ post }) {

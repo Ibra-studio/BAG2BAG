@@ -6,7 +6,7 @@ import CountrySelector from "../CountrySelector";
 // @ts-ignore
 import supabase from "@/services/supabaseClient";
 import { showErrorToast, showSuccessToast } from "../../../../utils/toast";
-import { useNavigate, useNavigation, useParams } from "react-router";
+import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 function EditPosts() {
   const [nbrKilo, setNbrKilo] = useState(0);

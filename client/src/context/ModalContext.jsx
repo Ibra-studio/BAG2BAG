@@ -5,7 +5,7 @@ const ModalContext = createContext();
 export function ModalProvider({ children }) {
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
-  const [navigateTo, setNavigateTo] = useState("/app/annonces");
+  const [navigateTo, setNavigateTo] = useState("/annonces");
 
   return (
     <ModalContext.Provider
