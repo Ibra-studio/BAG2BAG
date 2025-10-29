@@ -7,7 +7,7 @@ import Navbar from "../../components/ui/Navbar";
 import { addDays, set } from "date-fns";
 import "../../assets/global.css";
 // @ts-ignore
-import { ReactComponent as Ellipse } from "../../assets/icons/ellipse.svg";
+import { ReactComponent as Ellipse } from "../../assets/icons/Ellipse.svg";
 // @ts-ignore
 import { ReactComponent as KgIcon } from "../../assets/icons/kgIcon.svg";
 // @ts-ignore
