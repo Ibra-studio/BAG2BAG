@@ -1,4 +1,4 @@
-import Badge from "../ui/badge";
+import Badge from "../ui/Badge";
 import { Search, Edit, Trash2 } from "lucide-react";
 import defaultUser from "@/assets/images/default-user.png";
 import { deleteUser } from "@/services/apiUsers";

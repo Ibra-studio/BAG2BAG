@@ -1,4 +1,4 @@
-import Badge from "../ui/badge";
+import Badge from "../ui/Badge";
 
 // // Assuming mockVerificationRequests might be passed as a prop or fetched
 // // For now, using a similar structure to the original page, but this should be made dynamic
