@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { GetCurrentUser } from "@/utils/GetCurrentUser";
-import getUserRole from "@/utils/GetUserRole";
+import getUserRole from "@/utils/getUserRole";
 
 export default function ProtectedAdminRoute({ children }) {
   const navigate = useNavigate();
