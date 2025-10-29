@@ -357,8 +357,8 @@ function SearchBar() {
     params.set("depart", depart);
     params.set("destination", destination);
     // send ISO strings so they can be parsed reliably on the search page
-    params.set("dateFrom", date.from ? date.from.toISOString() : "");
-    params.set("dateTo", date.to ? date.to.toISOString() : "");
+      params.set("dateFrom", date.from ? date.from.toISOString().slice(0, 10) : "0000-01-01");
+      params.set("dateTo", date.to ? date.to.toISOString().slice(0, 10) : "9999-12-31");
     console.log(date);
     navigate(`/annonces?${params.toString()}`);
     setError("");
@@ -587,12 +587,13 @@ function Postlist({ filterPrice, filterVerified, filterStudent }) {
       const destination = searchParams.get("destination");
       const rawDateFrom = searchParams.get("dateFrom");
       const rawDateTo = searchParams.get("dateTo");
+      // use YYYY-MM-DD strings to match input[type=date] storage
       const dateFrom = rawDateFrom
-        ? new Date(rawDateFrom).toISOString()
-        : new Date(0).toISOString();
+        ? new Date(rawDateFrom).toISOString().slice(0, 10)
+        : "0000-01-01";
       const dateTo = rawDateTo
-        ? new Date(rawDateTo).toISOString()
-        : new Date("9999-12-31").toISOString();
+        ? new Date(rawDateTo).toISOString().slice(0, 10)
+        : "9999-12-31";
 
       getPost({
         kilo,
