@@ -33,7 +33,7 @@ const Users = React.lazy(() => import("./pages/AdminDashboard/pages/Users"));
 const Profile = React.lazy(() => import("./pages/profile/Profile"));
 const PostPage = React.lazy(() => import("./pages/annonces/search-annonces"));
 const AdminLayout = React.lazy(() =>
-  import("./pages/AdminDashboard/components/layout/AdminLayout")
+  import("./pages/AdminDashboard/components/layout/adminLayout")
 );
 const EditPosts = React.lazy(() =>
   import("./pages/annonces/components/form/EditPosts")
