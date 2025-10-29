@@ -10,7 +10,7 @@ import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore
 import Modal from "@/components/modal";
 // @ts-ignore
-import Login from "@/pages/Auth/login";
+import Login from "@/pages/Auth/Login";
 // @ts-ignore
 import SignUp from "@/pages/Auth/SignUp";
 import { useModal } from "../../context/ModalContext";
