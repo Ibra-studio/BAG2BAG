@@ -8,7 +8,7 @@ import Footer from "../../components/ui/Footer";
 // @ts-ignore
 import BtnPrimary from "@/components/ui/Btnprim";
 // @ts-ignore
-import Modal from "@/components/modal";
+import Modal from "@/components/Modal";
 // @ts-ignore
 import Login from "@/pages/Auth/Login";
 // @ts-ignore
